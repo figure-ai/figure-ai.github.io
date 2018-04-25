@@ -1,1 +1,4 @@
-theme: jekyll-theme-leap-day
+deploy：
+    - type: git
+      remote: origin
+      branch: gh-pages
