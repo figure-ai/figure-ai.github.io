@@ -1,34 +1,33 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="Stylesheet" type="text/css" href="/static/css/colorful.css">
-    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
     <title>GCD的使用 - </title>
+
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/style.css" rel="Stylesheet" >
   </head>
 
   <body>
-    <div id="container" class="typo">
+    <div class="container">
       
 <div id="header">
-  <div id="post-nav">
-    <a href="/"></a>
-    &nbsp;&#187;&nbsp;
-    <a href="/#OC">OC</a>
-    &nbsp;&#187;&nbsp;GCD的使用
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#OC">OC</a>&nbsp;&#187;&nbsp;GCD的使用
     <span class="updated">Updated&nbsp;
-    2018-04-02 00:00
-    </span>
-  </div>
+      2018-04-02 00:00
+    </span></div>
 </div>
 <div class="clearfix"></div>
-<div id="content">
+
+<div class="page_title">GCD的使用</div>
+
   <h1 id="gcd">GCD介绍及使用</h1>
 <div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#gcd">GCD介绍及使用</a><ul>
@@ -144,32 +143,34 @@
 <ol>
 <li>
 <p>创建串行队列</p>
-<p><code>dispatch_queue_t serialQueue = dispatch_queue_create("com.test.ch", DISPATCH_QUEUE_SERIAL);</code><br />
-2. 创建并行队列</p>
-<p><code>dispatch_queue_t crnQueue = dispatch_queue_create("com.test.ch",DISPATCH_QUEUE_CONCURRENT);</code><br />
-3. 获取主队列</p>
-<blockquote>
-<p>主队列是GCD提供的一种串行队列，所有放在主队列中的任务，都会放到<strong>主线程中执行</strong><br />
-<code>// 获取主队列
-dispatch_queue_t mainQueue = dispatch_get_main_queue();</code><br />
-4. 获取全局并发队列（Global Dispatch Queue）<br />
-全局并发队列是GCD提供的一种并发队列。<br />
-1. 可以使用<code>dispatch_get_global_queue</code>来获取，需要提供两个参数，第一个设置队列优先级，一般用<code>DISPATSH_QUEUE_PRIORITY_DEFAULT</code>，第二个参数暂时没用，传0即可。<br />
-<code>// 获取全局并发队列
+<p><code>dispatch_queue_t serialQueue = dispatch_queue_create("com.test.ch", DISPATCH_QUEUE_SERIAL);</code></p>
+</li>
+<li>
+<p>创建并行队列</p>
+<p><code>dispatch_queue_t crnQueue = dispatch_queue_create("com.test.ch",DISPATCH_QUEUE_CONCURRENT);</code></p>
+</li>
+<li>
+<p>获取主队列<br />
+    &gt; 主队列是GCD提供的一种串行队列，所有放在主队列中的任务，都会放到<strong>主线程中执行</strong></p>
+<p><code>// 获取主队列
+dispatch_queue_t mainQueue = dispatch_get_main_queue();</code></p>
+</li>
+<li>
+<p>获取全局并发队列（Global Dispatch Queue）<br />
+    &gt; 全局并发队列是GCD提供的一种并发队列。<br />
+    &gt; 1. 可以使用<code>dispatch_get_global_queue</code>来获取，需要提供两个参数，第一个设置队列优先级，一般用<code>DISPATSH_QUEUE_PRIORITY_DEFAULT</code>，第二个参数暂时没用，传0即可。</p>
+<p><code>// 获取全局并发队列
 dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);</code></p>
-</blockquote>
 </li>
 </ol>
 <h3 id="_4">任务的创建方法</h3>
 <ol>
 <li>
 <p>创建同步执行任务</p>
-<p>```</p>
-<p>// 创建同步执行任务，queue为指定存放任务的队列<br />
-dispatch_sync(queue, ^{<br />
-    // 这里放同步执行任务代码<br />
-});</p>
-<p>```</p>
+<p><code>// 创建同步执行任务，queue为指定存放任务的队列
+dispatch_sync(queue, ^{
+    // 这里放同步执行任务代码
+});</code></p>
 </li>
 <li>
 <p>创建异步执行任务<br />
@@ -878,23 +879,9 @@ dispatch_sync(queue, ^{<br />
 <li><a href="https://www.jianshu.com/p/a84c2bf0d77b">iOS GCD之dispatch_semaphore学习</a></li>
 </ul>
 </blockquote>
-  
-</div>
     </div>
-    <div id="footer">
-      <div class="footer-left">
-        <p>
-        Copyright © 2018 .
-        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
-        Theme by <a href="https://github.com/tankywoo/yasimple_x2" target="_blank">YASimple_X2</a>.
-        </p>
-      </div> <!-- end footer-left -->
-      <div class="footer-right">
-        <p>Site Generated 2018-04-25 18:00:52</p>
-      </div> <!-- end footer-right -->
-    </div>
-
-    
-    
+    <footer>
+      <p>Copyright © 2018 . Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.  Site Generated 2018-04-25 18:24:02 </p>
+    </footer>
   </body>
 </html>
