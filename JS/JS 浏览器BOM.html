@@ -1,36 +1,45 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>JS浏览器BOM - </title>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>JS浏览器BOM - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
 
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
-
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/static/css/style.css" rel="Stylesheet" >
-  </head>
-
-  <body>
-    <div class="container">
-      
-<div id="header">
-  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#JS">JS</a>&nbsp;&#187;&nbsp;JS浏览器BOM
-    <span class="updated">Updated&nbsp;
-      2018-04-02 00:00
-    </span></div>
-</div>
-<div class="clearfix"></div>
-
-<div class="page_title">JS浏览器BOM</div>
-
-  <h1 id="js-bom">JS 浏览器BOM</h1>
-<div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#js-bom">JS 浏览器BOM</a><ul>
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#JS">JS</a> » JS浏览器BOM
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#js-window-">JS Window-浏览器对象模型</a><ul>
 <li><a href="#window">Window对象</a></li>
 <li><a href="#window_1">Window尺寸</a></li>
@@ -73,8 +82,6 @@
 <li><a href="#jscookie_2">使用JS修改cookie</a></li>
 <li><a href="#jscookie_3">使用JS删除cookie</a></li>
 <li><a href="#cookie">检测cookie值的函数</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -529,8 +536,15 @@ clearTimeout(myVar);
 }</code></li>
 </ul>
     </div>
-    <footer>
-      <p>Copyright © 2018 . Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.  Site Generated 2018-04-25 18:35:01 </p>
-    </footer>
-  </body>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-04-25 18:51:01</p>
+        </div>
+    </body>
 </html>

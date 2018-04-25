@@ -1,35 +1,45 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>RN常用指令 - </title>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>RN常用指令 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
 
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
-
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/static/css/style.css" rel="Stylesheet" >
-  </head>
-
-  <body>
-    <div class="container">
-      
-<div id="header">
-  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#ReactNative">ReactNative</a>&nbsp;&#187;&nbsp;RN常用指令
-    <span class="updated">Updated&nbsp;
-      2018-04-02 00:00
-    </span></div>
-</div>
-<div class="clearfix"></div>
-
-<div class="page_title">RN常用指令</div>
-
-  <h1 id="rn">RN常用指令</h1>
-<p><code>react-native --v      //查看当前reactNative版本
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#ReactNative">ReactNative</a> » RN常用指令
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <p><code>react-native --v      //查看当前reactNative版本
    sudo npm update -g react-native-cli      //更新全局rn到最新版本
    npm info react-native    //查看服务器端rn各版本的信息
    npm install      // 根据配置的package.json给下载的工程项目下载安装rn环境
@@ -40,8 +50,15 @@
    npm install --save react-native @0.18       // 项目降级或升级到指定版本，记得之后要运行一下react-native upgrade 更新一下项目依赖等
    npm install react-native-storage --save      // 安装某个lib到项目中</code></p>
     </div>
-    <footer>
-      <p>Copyright © 2018 . Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.  Site Generated 2018-04-25 18:35:01 </p>
-    </footer>
-  </body>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-04-25 18:51:01</p>
+        </div>
+    </body>
 </html>
