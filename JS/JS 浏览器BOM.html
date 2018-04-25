@@ -1,0 +1,551 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/colorful.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    <title>“JS 浏览器BOM" - </title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+  </head>
+
+  <body>
+    <div id="container" class="typo">
+      
+<div id="header">
+  <div id="post-nav">
+    <a href="/"></a>
+    &nbsp;&#187;&nbsp;
+    <a href="/#JS">JS</a>
+    &nbsp;&#187;&nbsp;“JS 浏览器BOM"
+    <span class="updated">Updated&nbsp;
+    2018-04-02 00:00
+    </span>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div id="content">
+  <h1 id="js-bom">JS 浏览器BOM</h1>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#js-bom">JS 浏览器BOM</a><ul>
+<li><a href="#js-window-">JS Window-浏览器对象模型</a><ul>
+<li><a href="#window">Window对象</a></li>
+<li><a href="#window_1">Window尺寸</a></li>
+<li><a href="#window_2">其他Window方法</a></li>
+</ul>
+</li>
+<li><a href="#js">JS 获取有关用户屏幕信息</a><ul>
+<li><a href="#window-screen">Window Screen 可用宽度</a></li>
+<li><a href="#window-screen_1">Window Screen 可用高度</a></li>
+</ul>
+</li>
+<li><a href="#js-window-location">JS Window Location对象</a><ul>
+<li><a href="#urlhref">获取URL（href）</a></li>
+<li><a href="#urlpathname">获取URL路径名（pathname）</a></li>
+<li><a href="#_1">加载新文档（网页）</a></li>
+</ul>
+</li>
+<li><a href="#js_1">JS 获取历史记录</a><ul>
+<li><a href="#_2">后退网页</a></li>
+<li><a href="#_3">前进网页</a></li>
+</ul>
+</li>
+<li><a href="#js_2">JS获取浏览器信息</a></li>
+<li><a href="#js_3">JS 弹窗</a><ul>
+<li><a href="#_4">警告框</a></li>
+<li><a href="#_5">提示框</a></li>
+<li><a href="#_6">确认框</a></li>
+</ul>
+</li>
+<li><a href="#js_4">JS计时事件</a><ul>
+<li><a href="#setinterval">setInterval()方法</a></li>
+<li><a href="#clearinterval">clearInterval()方法</a></li>
+<li><a href="#settimeout">setTimeout()方法</a></li>
+<li><a href="#cleartimeout">clearTimeout()</a></li>
+</ul>
+</li>
+<li><a href="#js-cookie">JS Cookie</a><ul>
+<li><a href="#jscookie">使用JS创建cookie</a></li>
+<li><a href="#jscookie_1">使用JS读取cookie</a></li>
+<li><a href="#jscookie_2">使用JS修改cookie</a></li>
+<li><a href="#jscookie_3">使用JS删除cookie</a></li>
+<li><a href="#cookie">检测cookie值的函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="js-window-">JS Window-浏览器对象模型</h2>
+<ul>
+<li>浏览器对象模型（BOM）使JS有能力与浏览器对话</li>
+<li>由于现代浏览器几乎实现了JS交互性方面的相同方法和属性，因此常被认为是BOM的方法和属性。</li>
+</ul>
+<h3 id="window">Window对象</h3>
+<ul>
+<li>所有浏览器都支持Window对象，它表示浏览器窗口。</li>
+<li>所有JS全局对象、函数以及变量均会自动成为window对象的成员。</li>
+<li>全局变量是window对象的属性</li>
+<li>全局函数是window对象的方法</li>
+<li>
+<p>HTML DOM的document也是window对象的属性之一</p>
+<p><code>window.document.getElementById("header");</code></p>
+</li>
+</ul>
+<h3 id="window_1">Window尺寸</h3>
+<ul>
+<li>
+<p>有三种方法可以确定浏览器窗口的尺寸</p>
+</li>
+<li>
+<p>对于IE、Chrome、Firefox、Opera、Safari</p>
+<ul>
+<li>window.innerHeight - 浏览器窗口的内部高度（包括滚动条）</li>
+<li>window.innerWidth - 浏览器窗口的内部宽度（包括滚动条）</li>
+</ul>
+</li>
+<li>
+<p>对于IE8、7、6、5</p>
+<ul>
+<li>document.documentElement.clientHeight</li>
+<li>document.documentElement.clientWidth</li>
+</ul>
+</li>
+<li>
+<p>或者</p>
+<ul>
+<li>document.body.clientHeight</li>
+<li>document.body.clientWidth</li>
+</ul>
+</li>
+<li>
+<p>实例：获取浏览器高度宽度（涵盖所有浏览器）</p>
+<p><code>var w=window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+var h=window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;</code></p>
+</li>
+</ul>
+<h3 id="window_2">其他Window方法</h3>
+<ul>
+<li>window.open() - 打开新窗口</li>
+<li>window.close() - 关闭当前窗口</li>
+<li>window.moveTo() - 移动当前窗口</li>
+<li>window.resizeTo() - 调整当前窗口</li>
+</ul>
+<h2 id="js">JS 获取有关用户屏幕信息</h2>
+<ul>
+<li>window.screen 对象包含有关用户屏幕的信息</li>
+<li>window.screen 对象在编写时可以不使用window这个前缀<ul>
+<li>screen.avaliWidth - 可用的屏幕宽度</li>
+<li>screen.avaliHeight - 可用的屏幕高度</li>
+</ul>
+</li>
+</ul>
+<h3 id="window-screen">Window Screen 可用宽度</h3>
+<ul>
+<li>screen.avaliWidth 属性返回访问者屏幕的宽度，以像素为单位，减去界面特性，比如窗口任务栏这些。</li>
+</ul>
+<p><code>&lt;script&gt;
+document.write("可用宽度: " + screen.availWidth);
+&lt;/script&gt;</code></p>
+<h3 id="window-screen_1">Window Screen 可用高度</h3>
+<ul>
+<li>screen.avaliHeight 属性返回访问者屏幕的高度，以像素为单位，减去界面特性，比如窗口任务栏这些。</li>
+</ul>
+<p><code>&lt;script&gt;
+document.write("可用高度: " + screen.availHeight);
+&lt;/script&gt;</code></p>
+<h2 id="js-window-location">JS Window Location对象</h2>
+<ul>
+<li>window.location 对象用于获得当前页面的地址URL，并把浏览器重定向到新的界面。编写时可不写window前缀。</li>
+<li>
+<p>location的一些实例</p>
+<ul>
+<li>location.hostname 返回web主机的域名</li>
+<li>location.pathname 返回当前页面的路径和文件名</li>
+<li>location.port 返回web主机的端口（80或443）</li>
+<li>location.protocol 返回所使用的web协议（http://或https://）</li>
+</ul>
+</li>
+</ul>
+<h3 id="urlhref">获取URL（href）</h3>
+<ul>
+<li>location.href 属性返回当前页面的url</li>
+</ul>
+<p><code>&lt;script&gt;
+//输出当前页面的URL
+document.write(location.href);
+&lt;/script&gt;
+//输出： http://www.runoob.com/js/js-window-location.html</code></p>
+<h3 id="urlpathname">获取URL路径名（pathname）</h3>
+<ul>
+<li>location.pathname 属性返回URL的路径名</li>
+</ul>
+<p><code>&lt;script&gt;
+document.write(location.pathname);
+&lt;/script&gt;
+//输出： /js/js-window-location.html</code></p>
+<h3 id="_1">加载新文档（网页）</h3>
+<ul>
+<li>
+<p>location.assign() 方法加载新的文档</p>
+<p><code>//加载一个新文档，即打开http://www.w3cschool.cc这个页面
+   &lt;html&gt;
+&lt;head&gt;
+&lt;script&gt;
+function newDoc()
+  {
+  window.location.assign("http://www.w3cschool.cc")
+  }
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="Load new document" onclick="newDoc()"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></p>
+</li>
+</ul>
+<h2 id="js_1">JS 获取历史记录</h2>
+<ul>
+<li>window.history 对象包含浏览器的历史，编写时可以省略window前缀</li>
+</ul>
+<h3 id="_2">后退网页</h3>
+<ul>
+<li>history.back() 加载历史记录的前一个URL，与浏览器点击后退按钮效果相同</li>
+</ul>
+<p><code>&lt;html&gt;
+&lt;head&gt;
+&lt;script&gt;
+function goBack()
+  {
+  window.history.back()
+  }
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="Back" onclick="goBack()"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></p>
+<h3 id="_3">前进网页</h3>
+<ul>
+<li>history forward() 方法加载历史列表的下一个URL，与在浏览器中点击前进按钮效果相同</li>
+</ul>
+<p><code>&lt;html&gt;
+    &lt;head&gt;
+    &lt;script&gt;
+    function goForward()
+      {
+      window.history.forward()
+      }
+    &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;input type="button" value="Forward" onclick="goForward()"&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></p>
+<h2 id="js_2">JS获取浏览器信息</h2>
+<ul>
+<li>window.navigator 对象包含有关访问者浏览器的信息，编写时可以省略window前缀</li>
+</ul>
+<p><code>&lt;div id="example"&gt;&lt;/div&gt; 
+&lt;script&gt; 
+txt = "&lt;p&gt;浏览器代号: " + navigator.appCodeName + "&lt;/p&gt;"; 
+txt+= "&lt;p&gt;浏览器名称: " + navigator.appName + "&lt;/p&gt;"; 
+txt+= "&lt;p&gt;浏览器版本: " + navigator.appVersion + "&lt;/p&gt;"; 
+txt+= "&lt;p&gt;启用Cookies: " + navigator.cookieEnabled + "&lt;/p&gt;"; 
+txt+= "&lt;p&gt;硬件平台: " + navigator.platform + "&lt;/p&gt;"; 
+txt+= "&lt;p&gt;用户代理: " + navigator.userAgent + "&lt;/p&gt;"; 
+txt+= "&lt;p&gt;用户代理语言: " + navigator.systemLanguage + "&lt;/p&gt;"; 
+document.getElementById("example").innerHTML=txt; 
+&lt;/script&gt;</code></p>
+<ul>
+<li>
+<p>需要注意的是，navigator对象的信息具有误导性，因为：</p>
+<ul>
+<li>navigator数据可悲浏览器使用者更改</li>
+<li>一些浏览器对测试站点会识别错误</li>
+<li>浏览器无法报告晚于浏览器发布的新操作系统</li>
+</ul>
+</li>
+<li>
+<p>使用对象检测可以用来检测不同的浏览器</p>
+<ul>
+<li>
+<p>例如，只有Opera支持属性window.opera，因此可以识别出Opera</p>
+<p><code>if(window.opera) {
+    //此为Opera浏览器
+   }</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="js_3">JS 弹窗</h2>
+<ul>
+<li>JS中可以创建三种消息框：警告框、确认框、提示框</li>
+</ul>
+<h3 id="_4">警告框</h3>
+<ul>
+<li>当警告框出现后，用户需要点击确定按钮才能继续进行操作</li>
+<li>语法：</li>
+</ul>
+<p><code>//这里也可以省略window前缀，直接使用alert()方法
+   window.alert("sometext");</code></p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;script&gt;
+function myFunction()
+{
+    alert("你好，我是一个警告框！");
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" onclick="myFunction()" value="显示警告框"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></p>
+<h3 id="_5">提示框</h3>
+<ul>
+<li>
+<p>出现提示框时，用户需要输入某个值，然后点击确定，返回值为输入的值，点击取消，返回值为null</p>
+</li>
+<li>
+<p>语法</p>
+</li>
+</ul>
+<p><code>window.prompt("sometext","defaultvalue");</code></p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>var person=prompt("请输入你的名字","Harry Potter");
+if (person!=null &amp;&amp; person!="")
+{
+    x="你好 " + person + "! 今天感觉如何?";
+document.getElementById("demo").innerHTML=x;
+}</code></p>
+<h3 id="_6">确认框</h3>
+<ul>
+<li>语法</li>
+</ul>
+<p><code>//这里的window可以省略
+   window.confirm("sometext");</code></p>
+<ul>
+<li>
+<p>实例</p>
+<p><code>var r=confirm("按下按钮");
+if (r==true)
+{
+x="你按下了\"确定\"按钮!";
+}
+else
+{
+x="你按下了\"取消\"按钮!";
+}</code></p>
+</li>
+</ul>
+<h2 id="js_4">JS计时事件</h2>
+<ul>
+<li>setInterval() 间隔指定的毫秒数不停地执行指定的代码。</li>
+<li>setTimeOut() 经过指定的毫秒数后执行指定的代码</li>
+<li>注： 这是HTML DOM Window对象的两个方法</li>
+</ul>
+<h3 id="setinterval">setInterval()方法</h3>
+<ul>
+<li>间隔指定的毫秒数不停地执行指定的代码</li>
+<li>语法</li>
+</ul>
+<p><code>window.setInterval("javascript function", milliseconds);</code></p>
+<ul>
+<li>实例1</li>
+</ul>
+<p><code>//每3秒弹出一个hello
+   setInterval(function(){alert("Hello")},3000);</code></p>
+<ul>
+<li>实例2: 实时显示当前时间</li>
+</ul>
+<p><code>var myVar=setInterval(function(){myTimer()},1000);
+function myTimer()
+{
+var d=new Date();
+var t=d.toLocaleTimeString();
+document.getElementById("demo").innerHTML=t;
+}</code></p>
+<h3 id="clearinterval">clearInterval()方法</h3>
+<ul>
+<li>clearInterval()方法用来停止setInterval()方法执行的函数代码</li>
+<li>语法</li>
+</ul>
+<p><code>clearInterval(intervalVariable)</code></p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>&lt;p id="demo"&gt;&lt;/p&gt;
+&lt;button onclick="myStopFunction()"&gt;Stop time&lt;/button&gt;
+&lt;script&gt;
+var myVar=setInterval(function(){myTimer()},1000);
+function myTimer()
+{
+var d=new Date();
+var t=d.toLocaleTimeString();
+document.getElementById("demo").innerHTML=t;
+}
+function myStopFunction()
+{
+clearInterval(myVar);
+}
+&lt;/script&gt;</code></p>
+<h3 id="settimeout">setTimeout()方法</h3>
+<ul>
+<li>
+<p>经过多少时间后执行某个函数</p>
+</li>
+<li>
+<p>语法</p>
+</li>
+</ul>
+<p><code>window.setTimeout("javascript 函数",毫秒数);</code></p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>//等待3秒，弹出hello
+   setTimeout(function(){alert("hello")},3000);</code></p>
+<h3 id="cleartimeout">clearTimeout()</h3>
+<ul>
+<li>
+<p>用于停止执行setTimeout()方法的函数代码，如果函数未执行</p>
+</li>
+<li>
+<p>语法</p>
+</li>
+</ul>
+<p><code>clear.Timeout(timeoutVariable)</code></p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>var myVar;
+function myFunction()
+{
+myVar=setTimeout(function(){alert("Hello")},3000);
+}
+function myStopFunction()
+{
+clearTimeout(myVar);
+}</code></p>
+<h2 id="js-cookie">JS Cookie</h2>
+<ul>
+<li>
+<p>Cookie用于存储web页面的用户信息  </p>
+<ul>
+<li>当用户访问web页面时，他的名字可以记录在cookie中</li>
+<li>在用户下一次访问页面时，可以在cookie中读取用户访问记录。</li>
+</ul>
+</li>
+<li>
+<p>cookie以建值对形式存在</p>
+<p><code>username = Lch</code></p>
+</li>
+<li>
+<p>JS可以使用document.cookie属性来创建、读取、及删除cookie</p>
+</li>
+</ul>
+<h3 id="jscookie">使用JS创建cookie</h3>
+<ul>
+<li>创建cookie</li>
+</ul>
+<p><code>document.cookie = "username=LCH"</code><br />
+- 为cookie添加一个过期时间（以UTC或GMT时间），默认情况下，cookie在浏览器关闭时删除。</p>
+<p><code>document.cookie="username=LCH; expires=Thu,  18 Dec 2013 12:00:00 GMT"</code></p>
+<ul>
+<li>使用path参数告诉浏览器cookie的路径，默认情况下，cookie属于当前页面</li>
+</ul>
+<p><code>document.cookie="username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 GMT; path=/";</code></p>
+<ul>
+<li>实例： 设置cookie值的函数</li>
+</ul>
+<p><code>//cname: cookie的名称；cvalue: cookie的值；expires: cookie的过期时间
+   function setCookie(cname, cvalue, exdays)
+   {
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+   }</code></p>
+<h3 id="jscookie_1">使用JS读取cookie</h3>
+<ul>
+<li>在JS中可以使用以下代码来读取cookie</li>
+</ul>
+<p><code>var x = document.cookie;</code></p>
+<ul>
+<li>实例： 获取cookie值的函数</li>
+</ul>
+<p><code>function getCookie(cname)
+{
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i&lt;ca.length; i++) 
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}</code></p>
+<h3 id="jscookie_2">使用JS修改cookie</h3>
+<ul>
+<li>在JS中，修改cookie类似于创建cookie，修改之后旧的cookie将被覆盖</li>
+</ul>
+<p><code>document.cookie="username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 GMT; path=/";</code></p>
+<h3 id="jscookie_3">使用JS删除cookie</h3>
+<ul>
+<li>删除cookie只需设置参数为以前的时间即可</li>
+</ul>
+<p><code>document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";</code></p>
+<h3 id="cookie">检测cookie值的函数</h3>
+<ul>
+<li>以下是一个检测cookie是否创建的函数，如果设置cookie则显示问候信息，如果没有设置 cookie，将会显示一个弹窗用于询问访问者的名字，并调用 setCookie 函数将访问者的名字存储 365 天：<br />
+<code>function checkCookie()
+{
+  var username=getCookie("username");
+  if (username!="")
+  {
+    alert("Welcome again " + username);
+  }
+  else 
+  {
+    username = prompt("Please enter your name:","");
+    if (username!="" &amp;&amp; username!=null)
+    {
+      setCookie("username",username,365);
+    }
+  }
+}</code></li>
+</ul>
+  
+</div>
+    </div>
+    <div id="footer">
+      <div class="footer-left">
+        <p>
+        Copyright © 2018 .
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+        Theme by <a href="https://github.com/tankywoo/yasimple_x2" target="_blank">YASimple_X2</a>.
+        </p>
+      </div> <!-- end footer-left -->
+      <div class="footer-right">
+        <p>Site Generated 2018-04-25 17:55:47</p>
+      </div> <!-- end footer-right -->
+    </div>
+
+    
+    
+  </body>
+</html>

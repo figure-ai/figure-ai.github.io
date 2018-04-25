@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/colorful.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    <title>“JS基础" - </title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+  </head>
+
+  <body>
+    <div id="container" class="typo">
+      
+<div id="header">
+  <div id="post-nav">
+    <a href="/"></a>
+    &nbsp;&#187;&nbsp;
+    <a href="/#JS">JS</a>
+    &nbsp;&#187;&nbsp;“JS基础"
+    <span class="updated">Updated&nbsp;
+    2018-04-02 00:00
+    </span>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div id="content">
+  <h1 id="js">JS基础</h1>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#js">JS基础</a><ul>
+<li><a href="#_1">比较运算符</a></li>
+<li><a href="#typeofnullundefined">typeof、Null、Undefined</a><ul>
+<li><a href="#typeof">typeof操作符</a></li>
+<li><a href="#null">Null</a></li>
+<li><a href="#undefined">Undefined</a></li>
+<li><a href="#undefinednull">Undefined和Null的区别</a></li>
+</ul>
+</li>
+<li><a href="#js_1">JS类型转换</a><ul>
+<li><a href="#js_2">JS数据类型</a></li>
+<li><a href="#constructor">constructor属性</a></li>
+<li><a href="#_2">将数字/布尔值/日期转换为字符串</a></li>
+<li><a href="#_3">将字符串／布尔值／日期转换为数字</a></li>
+</ul>
+</li>
+<li><a href="#js_3">JS正则表达式</a><ul>
+<li><a href="#search">search()方法使用正则表达式</a></li>
+<li><a href="#search_1">search()方法使用字符串</a></li>
+<li><a href="#replace">replace()方法使用正则表达式</a></li>
+<li><a href="#replace_1">replace()方法使用字符串</a></li>
+<li><a href="#_4">正则表达式修饰符</a></li>
+<li><a href="#_5">正则表达式模式</a></li>
+<li><a href="#regexp">RegExp正则表达式对象</a><ul>
+<li><a href="#test">test()方法</a></li>
+<li><a href="#exec">exec()方法</a></li>
+<li><a href="#regexp_1">完整的RegExp参考手册</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#js-throwtrycatch">JS错误-throw、try和catch</a><ul>
+<li><a href="#trycatch">try、catch使用实例</a></li>
+<li><a href="#throw">Throw使用实例</a></li>
+</ul>
+</li>
+<li><a href="#js_4">JS变量提升</a><ul>
+<li><a href="#js_5">JS初始化变量，不会提升</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">比较运算符</h2>
+<p><code>==   :   等于，只比较值
+   ===  :   绝对等于，比较值和类型
+   !=   :   不等于，只比较值
+   !==  :   不绝对等于，值和类型有一个不相等或者两个都不相等为true</code></p>
+<h2 id="typeofnullundefined">typeof、Null、Undefined</h2>
+<h3 id="typeof">typeof操作符</h3>
+<ul>
+<li>typeof可以用来检测变量的数据类型</li>
+</ul>
+<p><code>typeof "John"                // 返回 string 
+typeof 3.14                  // 返回 number
+typeof false                 // 返回 boolean
+typeof [1,2,3,4]             // 返回 object
+typeof {name:'John', age:34} // 返回 object</code></p>
+<h3 id="null">Null</h3>
+<ul>
+<li>null是一个只有一个值的特殊类型，表示一个空对象引用。</li>
+<li>可以设置一个null来清空对象</li>
+</ul>
+<p><code>var person = null;           // 值为 null(空), 但类型为对象</code></p>
+<h3 id="undefined">Undefined</h3>
+<ul>
+<li>在JS中，undefined是一个没有设置值的变量</li>
+<li>typeof一个没有值的变量会返回undefined</li>
+<li>可以设置undefined来清空，类型为undefined</li>
+</ul>
+<p><code>person = undefined;          // 值为 undefined, 类型是undefined</code></p>
+<h3 id="undefinednull">Undefined和Null的区别</h3>
+<ul>
+<li>null和undefined的值相等，但类型不相等</li>
+</ul>
+<p><code>typeof undefined             // undefined
+typeof null                  // object
+null === undefined           // false
+null == undefined            // true</code></p>
+<h2 id="js_1">JS类型转换</h2>
+<ul>
+<li>通过使用JS函数转换</li>
+<li>通过JS自身自动转换</li>
+</ul>
+<h3 id="js_2">JS数据类型</h3>
+<ul>
+<li>
+<p>在JS中有5中数据类型</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>object</li>
+<li>function</li>
+</ul>
+</li>
+<li>
+<p>3种对象类型</p>
+<ul>
+<li>Object</li>
+<li>Date</li>
+<li>Array</li>
+</ul>
+</li>
+<li>
+<p>2个不包含任何值的数据类型</p>
+<ul>
+<li>null</li>
+<li>undefined</li>
+</ul>
+</li>
+</ul>
+<h3 id="constructor">constructor属性</h3>
+<ul>
+<li>
+<p>constructor属性返回所有JS变量的构造函数</p>
+</li>
+<li>
+<p>实例</p>
+</li>
+</ul>
+<p>```<br />
+"John".constructor                 // 返回函数 String()  { [native code] }<br />
+(3.14).constructor                 // 返回函数 Number()  { [native code] }<br />
+false.constructor                  // 返回函数 Boolean() { [native code] }<br />
+[1,2,3,4].constructor              // 返回函数 Array()   { [native code] }<br />
+{name:'John', age:34}.constructor  // 返回函数 Object()  { [native code] }<br />
+new Date().constructor             // 返回函数 Date()    { [native code] }<br />
+function () {}.constructor         // 返回函数 Function(){ [native code] }</p>
+<p>```</p>
+<h3 id="_2">将数字/布尔值/日期转换为字符串</h3>
+<ul>
+<li>全局方法String()可以将数字／字母／变量／表达式转换为字符串</li>
+</ul>
+<p><code>String(x)         // 将变量 x 转换为字符串并返回
+String(false)       // 返回false
+String(Date())  // 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</code></p>
+<ul>
+<li>使用toString也能实现相同的效果</li>
+</ul>
+<p><code>Date().toString()
+false.toString()
+(100 + 23).toString()</code></p>
+<h3 id="_3">将字符串／布尔值／日期转换为数字</h3>
+<ul>
+<li>
+<p>全局方法Number() 可以将字符串转换为数字</p>
+<ul>
+<li>空字符串转换为0</li>
+<li>其他字符串转换为NaN(不是数字)</li>
+</ul>
+</li>
+</ul>
+<p><code>Number("3.14")    // 返回 3.14
+   //将布尔值转换为数字
+   Number(false)    //返回 0
+   Number(true)     //返回 1
+   //将日期转换为数字
+   d = new Date();
+   Number(d)          // 返回 1404568027739
+    //日期转换为为数字使用getTime()也有相同的效果
+    d.getTime()     //返回 1404568027739</code><br />
+- pareseFloat() 解析一个字符串，返回一个浮点数<br />
+- pareseInt() 解析一个字符串，返回一个整数</p>
+<h2 id="js_3">JS正则表达式</h2>
+<blockquote>
+<p>正则表达可用于所有文本的搜索和替换操作</p>
+</blockquote>
+<ul>
+<li>语法</li>
+</ul>
+<p><code>/正则表达式主体／修饰符(可选)</code></p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>//runoob是正则表达式主体，i是一个修饰符（搜索时不区分大小写∫）
+   var patt = /runoob/i</code></p>
+<h3 id="search">search()方法使用正则表达式</h3>
+<ul>
+<li>
+<p>search()方法用于检索字符串中指定字符串的，或检索与正则表达式相匹配的子字符串，并返回子串的起始位置。</p>
+</li>
+<li>
+<p>实例</p>
+</li>
+</ul>
+<p><code>var str = "Visit Runoob!"
+   var n = str.search("Runoob");
+   //输出6</code></p>
+<h3 id="search_1">search()方法使用字符串</h3>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>var str = "Visit Runoob!"
+   var n = str.search("Runoob");
+   //输出6</code></p>
+<h3 id="replace">replace()方法使用正则表达式</h3>
+<ul>
+<li>
+<p>用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+</li>
+<li>
+<p>实例</p>
+</li>
+</ul>
+<p><code>//使用正则表达式，不区分大小写将字符串中的Microsoft替换为Runoob
+   var str = document.getElementById("demo").innerHTML;
+   var txt = str.replace("/microsoft/i", "Runoob");</code></p>
+<h3 id="replace_1">replace()方法使用字符串</h3>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>var str = document.getElementById("demo").innerHTML;
+   var txt = str.replace("Mirosoft","Runoob");</code></p>
+<h3 id="_4">正则表达式修饰符</h3>
+<ul>
+<li>i : 执行不区分大小写的匹配</li>
+<li>g : 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）</li>
+<li>m : 执行多行匹配</li>
+</ul>
+<h3 id="_5">正则表达式模式</h3>
+<ul>
+<li>
+<p>方括号[]用于查找某个范围内的字符</p>
+<ul>
+<li>[abc]  查找方括号之间的任何字符</li>
+<li>[0-9]  查找任何从0至9的数字</li>
+<li>(x|y)  查找任何以|分隔的选项</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p>元字符是拥有特殊含义的字符</p>
+<ul>
+<li>\d    查找数字</li>
+<li>\s    查找空白字符</li>
+<li>\b    匹配单词边界</li>
+<li>\uxxx 查找以十六进制数xxxx规定的Unicode字符</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p>量词</p>
+<ul>
+<li>n+    匹配任何包含至少一个n的字符串</li>
+<li>n*    匹配任何包含零个或多个n的字符串</li>
+<li>n?    匹配任何包含零个或一个n的字符串</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<h3 id="regexp">RegExp正则表达式对象</h3>
+<ul>
+<li>RegExp对象是一个预定义了属性和方法的正则表达式对象。</li>
+</ul>
+<h4 id="test">test()方法</h4>
+<blockquote>
+<p>test()方法是一个正则表达式方法<br />
+用于检测字符串是否匹配某个正则表达式。如果字符串中含有匹配的文本，则返回true， 否则返回false</p>
+</blockquote>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>var patt = /e/;
+   patt.test("The best things in life are free!");
+   //返回 true</code></p>
+<h4 id="exec">exec()方法</h4>
+<blockquote>
+<p>exec()方法是一个正则表达式方法<br />
+用于检索字符串中的正则表达式的匹配<br />
+该函数返回一个数组，其中存放匹配的结果，如果未找到，则返回值为null</p>
+</blockquote>
+<ul>
+<li>以下实例用于搜索字符串中的字母e</li>
+</ul>
+<p><code>/e/.exec("The best things in life are free!");
+   //输出e</code></p>
+<h4 id="regexp_1">完整的RegExp参考手册</h4>
+<p><a href="http://www.runoob.com/jsref/jsref-obj-regexp.html">JavaScript RegExp 对象</a></p>
+<h2 id="js-throwtrycatch">JS错误-throw、try和catch</h2>
+<ul>
+<li>try   语句测试代码块的错误</li>
+<li>catch 语句处理错误</li>
+<li>throw 语句创建自定义错误</li>
+</ul>
+<h3 id="trycatch">try、catch使用实例</h3>
+<p><code>var text = "";
+   function message() {
+    try {
+        addlert("Welcome guest!");
+    } catch(err) {
+        txt = "本页又一个错误。\n\n"
+        txt += "错误描述：" + err.message + ""\n\n;
+    }
+   }</code></p>
+<h3 id="throw">Throw使用实例</h3>
+<blockquote>
+<p>throw语句允许我们创建或抛出异常</p>
+</blockquote>
+<ul>
+<li>语法</li>
+</ul>
+<p><code>throw exception</code> </p>
+<ul>
+<li>实例</li>
+</ul>
+<p><code>function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo").value;
+    try {
+        if (x == "") throw "值为空";
+        if (isNaN(x)) throw "不是数字";
+        x = Number(x);
+        if (x &lt; 5)  throw "太小";
+        if (x &gt; 10) throw "太大";
+    }
+    catch (err) {
+        message.innerHTML = "错误：" + err;
+    }
+   }</code></p>
+<h2 id="js_4">JS变量提升</h2>
+<blockquote>
+<p>JS 中，函数及变量的声明都将被提升到函数的最顶部。<br />
+因此，JS 中，变量可以先使用再声明。</p>
+</blockquote>
+<ul>
+<li>实例</li>
+</ul>
+<p>```<br />
+   x = 5; //设置x为5，在此之前并没有对变量x作声明</p>
+<p>elem = document.getElementById("demo"); //查找元素<br />
+   elem.innerHTML = x;</p>
+<p>var x; //在此声明变量x<br />
+   ```</p>
+<h3 id="js_5">JS初始化变量，不会提升</h3>
+<ul>
+<li>
+<p>JS 只有声明的变量会提升，初始化的不会</p>
+</li>
+<li>
+<p>实例</p>
+</li>
+</ul>
+<p><code>elem = document.getElementById("demo");
+   elem.innerHTML = x;
+   var x = 7
+   /／输出结果为Undefin</code></p>
+  
+</div>
+    </div>
+    <div id="footer">
+      <div class="footer-left">
+        <p>
+        Copyright © 2018 .
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+        Theme by <a href="https://github.com/tankywoo/yasimple_x2" target="_blank">YASimple_X2</a>.
+        </p>
+      </div> <!-- end footer-left -->
+      <div class="footer-right">
+        <p>Site Generated 2018-04-25 17:55:47</p>
+      </div> <!-- end footer-right -->
+    </div>
+
+    
+    
+  </body>
+</html>
