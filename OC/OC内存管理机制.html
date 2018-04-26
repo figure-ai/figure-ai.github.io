@@ -51,16 +51,15 @@
 <h2 id="mrc">早期手动控制引用计数（MRC）</h2>
 <ul>
 <li>Object-C继承自C，拥有一套基于<strong>对象引用计数</strong>的内存管理体系（当对象引用计数为0时会被自动释放）。</li>
-<li>
-<p>需要注意的是：<strong>这套体系是对OC类型的内存管理，它对基本数据类型和C语言类型并不管用</strong></p>
-<p>```<br />
-int,short,char,struct,enum,union等类型</p>
-<p>OC类型：任何继承于NSObject对象都属于OC的类型。<br />
-```</p>
-</li>
-<li>
-<p>早期的内存管理开发人员需要使用<strong>alloc</strong>(alloc会使得对象的引用计数初始化为1)、<strong>retain</strong>、<strong>release</strong>、控制对象的引用计数</p>
-</li>
+<li>需要注意的是：<strong>这套体系是对OC类型的内存管理，它对基本数据类型和C语言类型并不管用</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="kt">int</span><span class="p">,</span><span class="kt">short</span><span class="p">,</span><span class="kt">char</span><span class="p">,</span><span class="k">struct</span><span class="p">,</span><span class="k">enum</span><span class="p">,</span><span class="n">union</span><span class="err">等类型</span>
+<span class="n">OC</span><span class="err">类型：任何继承于</span><span class="n">NSObject</span><span class="err">对象都属于</span><span class="n">OC</span><span class="err">的类型。</span>
+</pre></div>
+
+
+<ul>
+<li>早期的内存管理开发人员需要使用<strong>alloc</strong>(alloc会使得对象的引用计数初始化为1)、<strong>retain</strong>、<strong>release</strong>、控制对象的引用计数</li>
 </ul>
 <div class="hlcode"><pre><span class="c1">//申请内存，并调用初始化，返回指针</span>
 <span class="c1">//alloc会使得对象的引用计数初始化为1</span>
@@ -142,13 +141,15 @@ int,short,char,struct,enum,union等类型</p>
 <li>
 <p>property属性对应的setter写法</p>
 <ol>
-<li>
-<p><strong>assign</strong>：告诉编译器<strong>不要retain</strong>传入的参数（一般用于基本数据类型）</p>
+<li><strong>assign</strong>：告诉编译器<strong>不要retain</strong>传入的参数（一般用于基本数据类型）</li>
+</ol>
 <p><code>-(void)setEngine:(Engine*) engine  
 {  
      _engine=engine;  
-}</code><br />
-    2. <strong>retain</strong>:告诉编译器在把setter参数传给变量前，<strong>要先retain一下</strong>（通常用于对象属性）</p>
+}</code></p>
+<ol>
+<li><strong>retain</strong>:告诉编译器在把setter参数传给变量前，<strong>要先retain一下</strong>（通常用于对象属性）</li>
+</ol>
 <p><code>-(void)setEngine:(Engine*) engine  
 {  
    if(_engine!=engine){//判断是否重复设置  
@@ -156,9 +157,9 @@ int,short,char,struct,enum,union等类型</p>
            _engine=[engine retain];//多了一个引用，retainCount+1  
       }  
  }</code></p>
-</li>
-<li>
-<p><strong>copy</strong>: 在setter参数赋值给实例变量之前，<strong>先copy一下</strong>。（通常用于字符串属性）</p>
+<ol>
+<li><strong>copy</strong>: 在setter参数赋值给实例变量之前，<strong>先copy一下</strong>。（通常用于字符串属性）</li>
+</ol>
 <p><code>-(void)setEngine:(Engine*) engine  
 {  
    if(_engine!=engine){//判断是否重复设置  
@@ -166,8 +167,6 @@ int,short,char,struct,enum,union等类型</p>
            _engine=[engine copy];//多了一个引用，retainCount+1  
       }  
  }</code></p>
-</li>
-</ol>
 </li>
 </ul>
 <h2 id="_1">对象引用计数的缺点</h2>
@@ -194,7 +193,7 @@ int,short,char,struct,enum,union等类型</p>
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-04-26 15:14:33</p>
+                <p>Last Update 2018-04-26 15:21:16</p>
         </div>
     </body>
 </html>

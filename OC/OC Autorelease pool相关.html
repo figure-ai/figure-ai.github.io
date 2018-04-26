@@ -84,13 +84,16 @@
 </ol>
 <h2 id="_2">其他知识</h2>
 <ol>
-<li>
-<p>使用容器的block的枚举器时，内部会自动添加一个autoreleasepool</p>
-<p><code>[array enumerateObjectsUsingBlock:^(id obj, NSUInteger ind, BOOL *stop) {
-    // 这里会被一个局部@autoreleasepool{}包裹着
-}];</code><br />
-2. 普通的<strong>for循环</strong>和<strong>for-in循环</strong>中没有，但是性能还是<strong>for-in</strong>最高</p>
-</li>
+<li>使用容器的block的枚举器时，内部会自动添加一个autoreleasepool</li>
+</ol>
+<div class="hlcode"><pre><span class="p">[</span><span class="n">array</span> <span class="n">enumerateObjectsUsingBlock</span><span class="o">:^</span><span class="p">(</span><span class="kt">id</span> <span class="n">obj</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">ind</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 这里会被一个局部@autoreleasepool{}包裹着</span>
+<span class="p">}];</span>
+</pre></div>
+
+
+<ol>
+<li>普通的<strong>for循环</strong>和<strong>for-in循环</strong>中没有，但是性能还是<strong>for-in</strong>最高</li>
 </ol>
     </div>
 
@@ -101,7 +104,7 @@
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-04-26 15:14:33</p>
+                <p>Last Update 2018-04-26 15:21:16</p>
         </div>
     </body>
 </html>
