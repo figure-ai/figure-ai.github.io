@@ -39,18 +39,22 @@
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <ol>
+        <h1 id="macpython">Mac切换Python版本</h1>
+<ol>
 <li>
 <p>查看本机python目录</p>
-<p>```<br />
-which python3.6</p>
-<h1 id="usrlocalbinpython36">／usr/local/bin/python3.6</h1>
-<p>```</p>
+<p><code>which python3.6
+// ／usr/local/bin/python3.6</code></p>
 </li>
 <li>
 <p>修改bashrc配置文件</p>
-<p><code>vi ~/.bashrc</code></p>
 </li>
+</ol>
+<div class="hlcode"><pre><span class="n">vi</span> <span class="o">~/</span><span class="p">.</span><span class="n">bashrc</span>
+</pre></div>
+
+
+<ol>
 <li>
 <p>想要为某个特定用户修改 Python 版本，只需要在其 home 目录下创建一个 alias(别名) 即可。打开该用户的 ~/.bashrc 文件，添加新的别名信息来修改默认使用的 Python 版本。</p>
 <p><code>alias python='/usr/local/bin/python3.6'</code></p>
@@ -69,7 +73,7 @@ which python3.6</p>
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-04-26 15:05:16</p>
+                <p>Last Update 2018-04-26 15:13:18</p>
         </div>
     </body>
 </html>
