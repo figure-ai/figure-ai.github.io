@@ -5,7 +5,7 @@
         <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-        <title>iOS数据存储 - </title>
+        <title>Mac切换Python版本 - </title>
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,17 +33,33 @@
         <div id="post-nav">
             <div id="toggle-button">宽版</div>
             
-            <a href="/">Home</a> » <a href="/#OC">OC</a> » iOS数据存储
+            <a href="/">Home</a> » <a href="/#Python">Python</a> » Mac切换Python版本
             
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <h2 id="1-plist">1. plist 存储</h2>
-<h2 id="2-userdefault">2. 偏好设置（UserDefault）</h2>
-<h2 id="3-nskeyedarchivernscoding">3. NSKeyedArchiver归档（NSCoding）</h2>
-<h2 id="4-sqlite3">4. SQLite3</h2>
-<h2 id="5-core-data">5. Core Data</h2>
+        <ol>
+<li>
+<p>查看本机python目录</p>
+<p>```<br />
+which python3.6</p>
+<h1 id="usrlocalbinpython36">我的是 ／usr/local/bin/python3.6</h1>
+<p>```</p>
+</li>
+<li>
+<p>修改bashrc配置文件</p>
+<p><code>vi ~/.bashrc</code></p>
+</li>
+<li>
+<p>想要为某个特定用户修改 Python 版本，只需要在其 home 目录下创建一个 alias(别名) 即可。打开该用户的 ~/.bashrc 文件，添加新的别名信息来修改默认使用的 Python 版本。</p>
+<p><code>alias python='/usr/local/bin/python3.6'</code></p>
+</li>
+<li>
+<p>验证</p>
+<p><code>python</code></p>
+</li>
+</ol>
     </div>
 
         </div>
