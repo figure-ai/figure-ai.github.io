@@ -39,7 +39,54 @@
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <p>[TOC]<!----></p>
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#gcd">GCD简介</a></li>
+<li><a href="#gcd_1">GCD的优势</a></li>
+<li><a href="#gcd_2">GCD任务和队列</a><ul>
+<li><a href="#_1">任务</a></li>
+<li><a href="#_2">队列</a></li>
+</ul>
+</li>
+<li><a href="#gcd_3">GCD的使用步骤</a><ul>
+<li><a href="#_3">队列的创建/获取方法</a></li>
+<li><a href="#_4">任务的创建方法</a></li>
+</ul>
+</li>
+<li><a href="#gcd_4">GCD的基本使用</a><ul>
+<li><a href="#_5">同步执行+并行队列</a></li>
+<li><a href="#_6">异步执行+并发队列</a></li>
+<li><a href="#_7">同步执行+串行队列</a></li>
+<li><a href="#_8">异步执行+串行</a></li>
+<li><a href="#_9">同步执行+主队列</a><ul>
+<li><a href="#_10">主线程中调用</a></li>
+<li><a href="#_11">其他线程调用</a></li>
+</ul>
+</li>
+<li><a href="#_12">异步执行+主队列</a></li>
+</ul>
+</li>
+<li><a href="#gcd_5">GCD线程间的通信</a></li>
+<li><a href="#gcd_6">GCD的其他方法</a><ul>
+<li><a href="#dispatch95barrier95async">∑dispatch_barrier_async</a></li>
+<li><a href="#gcddispatch95after">GCD延时执行方法：dispatch_after</a></li>
+<li><a href="#gcddispatch95once">GCD只执行一次代码的方法：dispatch_once</a></li>
+<li><a href="#gcddispatch95apply">GCD快速迭代方法：dispatch_apply</a></li>
+<li><a href="#gcddispatch95group">GCD队列组：dispatch_group</a><ul>
+<li><a href="#dispatch95group95notify">dispatch_group_notify</a></li>
+<li><a href="#dispatch95group95wait">dispatch_group_wait</a></li>
+<li><a href="#dispatch95group95enterdispatch95group95leave">dispatch_group_enter、dispatch_group_leave</a></li>
+</ul>
+</li>
+<li><a href="#gcddispatch95semaphore">GCD信号量：dispatch_semaphore</a><ul>
+<li><a href="#dispatch-semaphore">Dispatch Semaphore 线程同步</a></li>
+<li><a href="#dispatch-semaphore_1">Dispatch Semaphore 线程安全（为线程加锁）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_13">参考资料</a></li>
+</ul>
+</div>
 <h2 id="gcd">GCD简介</h2>
 <blockquote>
 <p>GCD全称<strong>Grand Central Dispatch</strong>，是苹果公司为<strong>多核并行运算</strong>提出的解决方案，可以优化应用以支持多核处理器以及其他对称多处理系统。</p>
@@ -848,7 +895,7 @@ dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-04-26 15:02:57</p>
+                <p>Last Update 2018-04-26 15:05:16</p>
         </div>
     </body>
 </html>
