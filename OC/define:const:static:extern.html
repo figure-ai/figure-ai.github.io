@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>define、const、static、extern - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » define、const、static、extern
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <ul>
+<li>define: 通常所说的宏，宏是在预编译的时候处理<strong>变量的替换</strong>，宏除了定义变量还可以<strong>定义一些方法</strong>，宏不做编译检查，不报编译错误，大量使用宏会导致二进制文件过大，编译时间过长。</li>
+</ul>
+<div class="hlcode"><pre><span class="c">#define Identifie @&quot;identifier&quot;</span>
+</pre></div>
+
+
+<ul>
+<li>const: <strong>修饰变量或指针变量只读不能修改</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="c1">//利用const定义一个全局只读变量 </span>
+<span class="n">NSString</span>  <span class="o">*</span> <span class="k">const</span> <span class="n">Kname</span> <span class="o">=</span> <span class="s">@&quot;key&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>static: <strong>将变量的访问范围控制在一个文件内</strong></p>
+<ul>
+<li><strong>修饰局部变量：</strong>保证局部变量只初始化一次。</li>
+</ul>
+<p><code>for (int k=0; k&lt;2; k++) {
+   static int i = 1;
+    i++;
+    NSLog(@"i的值=%d",i);
+}
+输出：
+i的值=2
+i的值=3</code></p>
+<ul>
+<li><strong>修饰全局变量：</strong>使全局变量的作用域仅限于当前文件内，比较典型的是使用GCD一次性函数创建的单例</li>
+</ul>
+<p><code>//static修饰全局变量，让外界文件无法访问
+static LoginTool *_sharedManager = nil;
++ (LoginTool *)sharedManager {   
+   static dispatch_once_t oncePredicate;   
+   dispatch_once(&amp;oncePredicate, ^{
+        _sharedManager = [[self alloc] init];
+    });   
+   return _sharedManager;
+}</code></p>
+</li>
+<li>
+<p>extern: <strong>将变量访问范围扩展</strong>，我们可以在.h文件中extern声明一些全局的常量，在.m文件中实现或赋值，这样，只要导入头文件，就可以全局的使用定义的变量或常量。</p>
+</li>
+</ul>
+<div class="hlcode"><pre><span class="c1">//声明一些全局常量</span>
+<span class="k">extern</span> <span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">name</span><span class="p">;</span>
+<span class="k">extern</span> <span class="n">NSInteger</span> <span class="k">const</span> <span class="n">count</span><span class="p">;</span>
+<span class="err">然后在</span><span class="p">.</span><span class="n">m</span><span class="err">文件中去实现</span>
+<span class="cp">#import </span><span class="c1">//实现</span>
+<span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;王五&quot;</span><span class="p">;</span>
+<span class="n">NSInteger</span> <span class="k">const</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</pre></div>
+
+
+<ul>
+<li><strong>static与const联合使用，声明一个文件中的只读常量</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="c1">// 开发中经常拿到key修改值，因此用const修饰key,表示key只读，不允许修改。</span>
+<span class="k">static</span>  <span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">key</span> <span class="o">=</span> <span class="s">@&quot;name&quot;</span><span class="p">;</span>
+<span class="c1">// 如果 const修饰 *key1,表示*key1只读，key1还是能改变。</span>
+<span class="k">static</span>  <span class="n">NSString</span> <span class="k">const</span> <span class="o">*</span><span class="n">key1</span> <span class="o">=</span> <span class="s">@&quot;name&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<ul>
+<li><strong>extern与const联合使用定义一份全局常量，多个文件共享。</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="err">•</span>    <span class="n">GlobalConst</span><span class="p">.</span><span class="n">h</span>
+<span class="k">extern</span> <span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">nameKey</span> <span class="o">=</span> <span class="s">@&quot;name&quot;</span><span class="p">;</span>
+
+<span class="err">•</span>   <span class="n">GlobalConst</span><span class="p">.</span><span class="n">m</span>
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">nameKey</span> <span class="o">=</span> <span class="s">@&quot;name&quot;</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-05-15 15:23:45</p>
+        </div>
+    </body>
+</html>
