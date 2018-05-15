@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>OC内存管理机制 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » OC内存管理机制
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#mrc">早期手动控制引用计数（MRC）</a></li>
+<li><a href="#autorelease-pool">自动释放池的出现(Autorelease pool)</a></li>
+<li><a href="#arc">自动引用计数（ARC）</a></li>
+<li><a href="#oc">OC对象在内存中的结构</a></li>
+<li><a href="#_1">对象引用计数的缺点</a></li>
+<li><a href="#_2">相关资料</a></li>
+</ul>
+</div>
+<h2 id="mrc">早期手动控制引用计数（MRC）</h2>
+<ul>
+<li>Object-C继承自C，拥有一套基于<strong>对象引用计数</strong>的内存管理体系（当对象引用计数为0时会被自动释放）。</li>
+<li>需要注意的是：<strong>这套体系是对OC类型的内存管理，它对基本数据类型和C语言类型并不管用</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="kt">int</span><span class="p">,</span><span class="kt">short</span><span class="p">,</span><span class="kt">char</span><span class="p">,</span><span class="k">struct</span><span class="p">,</span><span class="k">enum</span><span class="p">,</span><span class="n">union</span><span class="err">等类型</span>
+<span class="n">OC</span><span class="err">类型：任何继承于</span><span class="n">NSObject</span><span class="err">对象都属于</span><span class="n">OC</span><span class="err">的类型。</span>
+</pre></div>
+
+
+<ul>
+<li>早期的内存管理开发人员需要使用<strong>alloc</strong>(alloc会使得对象的引用计数初始化为1)、<strong>retain</strong>、<strong>release</strong>、控制对象的引用计数</li>
+</ul>
+<div class="hlcode"><pre><span class="c1">//申请内存，并调用初始化，返回指针</span>
+<span class="c1">//alloc会使得对象的引用计数初始化为1</span>
+<span class="n">Engine</span> <span class="o">*</span><span class="n">engine1</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Engine</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span> 
+
+<span class="c1">//调用retain，等同于使引用计数+1</span>
+<span class="p">[</span><span class="n">engine1</span> <span class="n">retain</span><span class="p">];</span>
+
+<span class="c1">//调用release，等同于使引用计数-1</span>
+<span class="c1">//只有当引用计数为0时，对象才会释放</span>
+<span class="p">[</span><span class="n">engine1</span> <span class="n">release</span><span class="p">];</span>
+</pre></div>
+
+
+<ul>
+<li>假设有一个类，其中包含有多个属性，这些属性都是<strong>指针类型</strong>，这个时候就需要使用对象的<strong>set</strong>和<strong>get</strong>方法对了的字段进行封装</li>
+</ul>
+<div class="hlcode"><pre><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setName:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">name</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">Name</span> <span class="o">!=</span> <span class="n">name</span><span class="p">){</span>
+        <span class="c1">// 如果self.Name 不等于传进来的name，则释放旧的Name</span>
+        <span class="p">[</span><span class="n">Name</span> <span class="n">release</span><span class="p">];</span>
+        <span class="n">Name</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="n">retain</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">-</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span> <span class="nf">getName</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span><span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">setName</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2 id="autorelease-pool">自动释放池的出现(Autorelease pool)</h2>
+<ul>
+<li><strong>Autorelease实际上只是把对release的调用延迟了，对于每一个Autorelease，系统只是把该Object放入了当前的Autorelease pool中，当该pool被释放时，pool中的所有Object会调用Release</strong></li>
+<li>自动释放池的出现主要解决一个问题， <strong>需要在一个方法内部申请内存，并将内存地址返回给调用者时，谁来释放这个内存</strong></li>
+<li>对于每一个Runloop，系统会隐式创建一个Autorelease pool，这样所有的release pool会构成一个像CallStack的栈式结构，在每一个Runloop结束时，当前栈顶的Autorelease pool会被销毁，这样pool里的每一个Object会被release</li>
+<li>自动释放池遵循的原则是：<strong>谁申请谁释放</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="n">The</span> <span class="n">basic</span> <span class="n">rule</span> <span class="n">to</span> <span class="n">apple</span> <span class="n">is</span> <span class="n">everything</span> <span class="n">thatincreases</span> <span class="n">the</span> <span class="n">reference</span> <span class="n">counter</span> <span class="n">with</span> <span class="n">alloc</span><span class="p">,[</span><span class="n">mutable</span><span class="p">]</span><span class="n">copy</span><span class="p">[</span><span class="n">WithZone</span><span class="o">:</span><span class="p">]</span> <span class="n">or</span> <span class="n">retainis</span> <span class="n">in</span> <span class="n">charge</span> <span class="n">of</span> <span class="n">the</span> <span class="n">corresponding</span> <span class="p">[</span><span class="k">auto</span><span class="p">]</span><span class="n">release</span><span class="p">.</span>
+
+<span class="err">如果一个对象使用了</span><span class="n">alloc</span><span class="err">，</span><span class="p">[</span><span class="n">mutable</span><span class="p">]</span> <span class="n">copy</span><span class="err">，</span><span class="n">retain</span><span class="err">，那么必须使用相应的</span><span class="n">release</span><span class="err">或</span><span class="n">autorelease</span>
+</pre></div>
+
+
+<h2 id="arc">自动引用计数（ARC）</h2>
+<ul>
+<li><strong>自动引用计数（ARC）是编译器的一个功能</strong>，也是目前开发所使用的，实际上<strong>ARC只是编译器帮开发者完成了对引用计数的增减，并没有少了引用计数的环节。</strong></li>
+</ul>
+<h2 id="oc">OC对象在内存中的结构</h2>
+<ul>
+<li>实际上我们所说的OC内存管理是对OC类型的内存管理，它对基本数据类型和C语言类型是不管用的。</li>
+</ul>
+<div class="hlcode"><pre>    <span class="kt">int</span><span class="p">,</span><span class="kt">short</span><span class="p">,</span><span class="kt">char</span><span class="p">,</span><span class="k">struct</span><span class="p">,</span><span class="k">enum</span><span class="p">,</span><span class="n">union</span><span class="err">等类型</span>
+
+    <span class="n">OC</span><span class="err">类型：任何继承于</span><span class="n">NSObject</span><span class="err">对象都属于</span><span class="n">OC</span><span class="err">的类型。</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>所有OC类型的对象（任何继承于NSObject对象的的类型）都会包含一个retainCount的计数器属性</p>
+</li>
+<li>
+<p>计算规则</p>
+<ol>
+<li>Objective-C类中实现了引用计数器，对象知道自己当前被引用的次数</li>
+<li>初始化时对象的计数器为1</li>
+<li>如果需要引用对象，可以给对象发送一个retain消息，这样对象的计数器就加1</li>
+<li>当不需要引用对象了，可以给对象发送release消息，这样对象计数器就减1</li>
+<li>当计数器减到0，自动调用对象的dealloc函数，对象就会释放内存</li>
+<li>计数器为0的对象不能再使用release和其他方法</li>
+</ol>
+</li>
+<li>
+<p>property属性对应的setter写法</p>
+<ol>
+<li><strong>assign</strong>：告诉编译器<strong>不要retain</strong>传入的参数（一般用于基本数据类型）</li>
+</ol>
+<p><code>-(void)setEngine:(Engine*) engine  
+{  
+     _engine=engine;  
+}</code></p>
+<ol>
+<li><strong>retain</strong>:告诉编译器在把setter参数传给变量前，<strong>要先retain一下</strong>（通常用于对象属性）</li>
+</ol>
+<p><code>-(void)setEngine:(Engine*) engine  
+{  
+   if(_engine!=engine){//判断是否重复设置  
+           [_engine release];//在设置之前，先release，那么在设置的时候，就会自动将前面的一个引用release掉  
+           _engine=[engine retain];//多了一个引用，retainCount+1  
+      }  
+ }</code></p>
+<ol>
+<li><strong>copy</strong>: 在setter参数赋值给实例变量之前，<strong>先copy一下</strong>。（通常用于字符串属性）</li>
+</ol>
+<p><code>-(void)setEngine:(Engine*) engine  
+{  
+   if(_engine!=engine){//判断是否重复设置  
+           [_engine release];//在设置之前，先release，那么在设置的时候，就会自动将前面的一个引用release掉  
+           _engine=[engine copy];//多了一个引用，retainCount+1  
+      }  
+ }</code></p>
+</li>
+</ul>
+<h2 id="_1">对象引用计数的缺点</h2>
+<blockquote>
+<p><strong>无法检测出循环引用</strong>。如父对象有一个对子对象的引用，子对象反过来引用父对象。这样，他们的引用计数永远不可能为0。</p>
+</blockquote>
+<h2 id="_2">相关资料</h2>
+<blockquote>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000002879323">Objective-C 内存管理的历史和参考资料</a></li>
+<li><a href="http://www.cnblogs.com/mybkn/articles/3123967.html">iOS:内存管理（一）：OC中的内存管理</a></li>
+<li><a href="http://www.cnblogs.com/mybkn/articles/3123981.html">iOS:内存管理（二）：怎样在xcode里面使用Memory Leaks和Instruments教程</a></li>
+<li><a href="http://www.cnblogs.com/mybkn/articles/3124000.html">iOS:内存管理（三）：在Objective-c里面使用property教程</a></li>
+<li><a href="https://blog.csdn.net/lonelyroamer/article/details/7666851">Objective-C的内存管理（一）黄金法则的理解</a></li>
+<li><a href="https://blog.csdn.net/lonelyroamer/article/details/7673940">Objective-C的内存管理（二）autorelease的理解</a></li>
+</ul>
+</blockquote>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-04-26 15:21:16</p>
+        </div>
+    </body>
+</html>

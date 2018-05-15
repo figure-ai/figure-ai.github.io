@@ -1,71 +1,83 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
-    <title>GCD的使用 - 个人wiki</title>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>GCD的使用 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
 
-  <body>
-    <div id="container">
-      
-<div id="header">
-  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#intro">intro</a>&nbsp;&#187;&nbsp;GCD的使用
-    <span class="updated">Page Updated&nbsp;
-      2099-06-02 00:00
-    </span></div>
-</div>
-<div class="clearfix"></div>
+    </head>
 
-<div class="page_title">GCD的使用</div>
-
-  <h1 id="gcd">GCD介绍及使用</h1>
-<div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#gcd">GCD介绍及使用</a><ul>
-<li><a href="#gcd_1">GCD简介</a></li>
-<li><a href="#gcd_2">GCD的优势</a></li>
-<li><a href="#gcd_3">GCD任务和队列</a><ul>
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » GCD的使用
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#gcd">GCD简介</a></li>
+<li><a href="#gcd_1">GCD的优势</a></li>
+<li><a href="#gcd_2">GCD任务和队列</a><ul>
 <li><a href="#_1">任务</a></li>
 <li><a href="#_2">队列</a></li>
 </ul>
 </li>
-<li><a href="#gcd_4">GCD的使用步骤</a><ul>
+<li><a href="#gcd_3">GCD的使用步骤</a><ul>
 <li><a href="#_3">队列的创建/获取方法</a></li>
 <li><a href="#_4">任务的创建方法</a></li>
 </ul>
 </li>
-<li><a href="#gcd_5">GCD的基本使用</a><ul>
+<li><a href="#gcd_4">GCD的基本使用</a><ul>
 <li><a href="#_5">同步执行+并行队列</a></li>
 <li><a href="#_6">异步执行+并发队列</a></li>
 <li><a href="#_7">同步执行+串行队列</a></li>
 <li><a href="#_8">异步执行+串行</a></li>
 <li><a href="#_9">同步执行+主队列</a><ul>
-<li><a href="#_10">在主线程中调用（同步执行+主队列）</a></li>
-<li><a href="#_11">在其他线程调用</a></li>
+<li><a href="#_10">主线程中调用</a></li>
+<li><a href="#_11">其他线程调用</a></li>
 </ul>
 </li>
 <li><a href="#_12">异步执行+主队列</a></li>
 </ul>
 </li>
-<li><a href="#gcd_6">GCD线程间的通信</a></li>
-<li><a href="#gcd_7">GCD的其他方法</a><ul>
-<li><a href="#gcddispatch_barrier_async">GCD栅栏方法：dispatch_barrier_async</a></li>
-<li><a href="#gcddispatch_after">GCD延时执行方法：dispatch_after</a></li>
-<li><a href="#gcddispatch_once">GCD只执行一次代码的方法：dispatch_once</a></li>
-<li><a href="#gcddispatch_apply">GCD快速迭代方法：dispatch_apply</a></li>
-<li><a href="#gcddispatch_group">GCD队列组：dispatch_group</a><ul>
-<li><a href="#dispatch_group_notify">dispatch_group_notify</a></li>
-<li><a href="#dispatch_group_wait">dispatch_group_wait</a></li>
-<li><a href="#dispatch_group_enterdispatch_group_leave">dispatch_group_enter、dispatch_group_leave</a></li>
+<li><a href="#gcd_5">GCD线程间的通信</a></li>
+<li><a href="#gcd_6">GCD的其他方法</a><ul>
+<li><a href="#dispatch95barrier95async">∑dispatch_barrier_async</a></li>
+<li><a href="#gcddispatch95after">GCD延时执行方法：dispatch_after</a></li>
+<li><a href="#gcddispatch95once">GCD只执行一次代码的方法：dispatch_once</a></li>
+<li><a href="#gcddispatch95apply">GCD快速迭代方法：dispatch_apply</a></li>
+<li><a href="#gcddispatch95group">GCD队列组：dispatch_group</a><ul>
+<li><a href="#dispatch95group95notify">dispatch_group_notify</a></li>
+<li><a href="#dispatch95group95wait">dispatch_group_wait</a></li>
+<li><a href="#dispatch95group95enterdispatch95group95leave">dispatch_group_enter、dispatch_group_leave</a></li>
 </ul>
 </li>
-<li><a href="#gcddispatch_semaphore">GCD信号量：dispatch_semaphore</a><ul>
+<li><a href="#gcddispatch95semaphore">GCD信号量：dispatch_semaphore</a><ul>
 <li><a href="#dispatch-semaphore">Dispatch Semaphore 线程同步</a></li>
 <li><a href="#dispatch-semaphore_1">Dispatch Semaphore 线程安全（为线程加锁）</a></li>
 </ul>
@@ -74,21 +86,19 @@
 </li>
 <li><a href="#_13">参考资料</a></li>
 </ul>
-</li>
-</ul>
 </div>
-<h2 id="gcd_1">GCD简介</h2>
+<h2 id="gcd">GCD简介</h2>
 <blockquote>
 <p>GCD全称<strong>Grand Central Dispatch</strong>，是苹果公司为<strong>多核并行运算</strong>提出的解决方案，可以优化应用以支持多核处理器以及其他对称多处理系统。</p>
 </blockquote>
-<h2 id="gcd_2">GCD的优势</h2>
+<h2 id="gcd_1">GCD的优势</h2>
 <ul>
 <li>自动利用更多的CPU内核（如：双核、四核）</li>
 <li>自动管理线程的生命周期（创建线程、调度任务、销毁线程等，ARC模式下）</li>
 <li>自动管理线程的生命周期（创建线程、调度任务、销毁线程）</li>
 <li>程序员只需要告诉GCD想要执行什么任务，不需要编写任何线程管理代码。</li>
 </ul>
-<h2 id="gcd_3">GCD任务和队列</h2>
+<h2 id="gcd_2">GCD任务和队列</h2>
 <h3 id="_1">任务</h3>
 <blockquote>
 <p>任务就是线程中要执行的代码，在GCD中是放在block中的，执行任务的方式有两种：<strong>同步执行（sync）和异步执行（async）</strong></p>
@@ -107,13 +117,11 @@
 </li>
 <li>无需等待任务返回，可以继续执行下一个任务，同时执行多个任务。</li>
 </ul>
-</li>
-</ol>
 <h3 id="_2">队列</h3>
 <blockquote>
 <p>用来<strong>存放任务</strong>的等待队列，是一种特殊的线性表，采用FIFO（先进先出）的原则。GCD中有两种队列：<strong>串行队列和并行队列</strong></p>
 </blockquote>
-<ol>
+</li>
 <li>
 <p><strong>串行队列</strong></p>
 <ul>
@@ -128,7 +136,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="gcd_4">GCD的使用步骤</h2>
+<h2 id="gcd_3">GCD的使用步骤</h2>
 <ol>
 <li>创建一个队列</li>
 <li>创建任务，并将任务追加到队列中，然后系统就会根据任务类型执行任务。</li>
@@ -140,50 +148,63 @@
 2. 第二个参数用来识别是串行（<code>DISPATCH_QUEUE_SERIAL</code>）队列还是并行队列（<code>DISPATCH_QUEUE_CONCURRENT</code>）</p>
 </blockquote>
 <ol>
-<li>
-<p>创建串行队列</p>
-<p><code>dispatch_queue_t serialQueue = dispatch_queue_create("com.test.ch", DISPATCH_QUEUE_SERIAL);</code></p>
-</li>
-<li>
-<p>创建并行队列</p>
-<p><code>dispatch_queue_t crnQueue = dispatch_queue_create("com.test.ch",DISPATCH_QUEUE_CONCURRENT);</code></p>
-</li>
-<li>
-<p>获取主队列<br />
-    &gt; 主队列是GCD提供的一种串行队列，所有放在主队列中的任务，都会放到<strong>主线程中执行</strong></p>
-<p><code>// 获取主队列
-dispatch_queue_t mainQueue = dispatch_get_main_queue();</code><br />
-4. 获取全局并发队列（Global Dispatch Queue）</p>
-<blockquote>
-<p>全局并发队列是GCD提供的一种并发队列。<br />
-1. 可以使用<code>dispatch_get_global_queue</code>来获取，需要提供两个参数，第一个设置队列优先级，一般用<code>DISPATSH_QUEUE_PRIORITY_DEFAULT</code>，第二个参数暂时没用，传0即可。</p>
-</blockquote>
-<p><code>// 获取全局并发队列
-dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);</code></p>
-</li>
+<li>创建串行队列</li>
 </ol>
+<div class="hlcode"><pre><span class="kt">dispatch_queue_t</span> <span class="n">serialQueue</span> <span class="o">=</span> <span class="n">dispatch_queue_create</span><span class="p">(</span><span class="s">&quot;com.test.ch&quot;</span><span class="p">,</span> <span class="n">DISPATCH_QUEUE_SERIAL</span><span class="p">);</span>
+</pre></div>
+
+
+<ol>
+<li>创建并行队列</li>
+</ol>
+<div class="hlcode"><pre><span class="kt">dispatch_queue_t</span> <span class="n">crnQueue</span> <span class="o">=</span> <span class="n">dispatch_queue_create</span><span class="p">(</span><span class="s">&quot;com.test.ch&quot;</span><span class="p">,</span><span class="n">DISPATCH_QUEUE_CONCURRENT</span><span class="p">);</span>
+</pre></div>
+
+
+<ol>
+<li>获取主队列<br />
+    &gt; 主队列是GCD提供的一种串行队列，所有放在主队列中的任务，都会放到<strong>主线程中执行</strong></li>
+</ol>
+<div class="hlcode"><pre><span class="c1">// 获取主队列</span>
+<span class="n">dispatch_queue_t</span> <span class="n">mainQueue</span> <span class="o">=</span> <span class="n">dispatch_get_main_queue</span><span class="p">();</span>
+</pre></div>
+
+
+<ol>
+<li>获取全局并发队列（Global Dispatch Queue）<br />
+    &gt; 全局并发队列是GCD提供的一种并发队列。<br />
+    &gt; 1. 可以使用<code>dispatch_get_global_queue</code>来获取，需要提供两个参数，第一个设置队列优先级，一般用<code>DISPATSH_QUEUE_PRIORITY_DEFAULT</code>，第二个参数暂时没用，传0即可。</li>
+</ol>
+<div class="hlcode"><pre><span class="c1">// 获取全局并发队列</span>
+<span class="n">dispatch_queue_t</span> <span class="n">globalQueue</span> <span class="o">=</span> <span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="no">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="p">,</span><span class="mh">0</span><span class="p">);</span>
+</pre></div>
+
+
 <h3 id="_4">任务的创建方法</h3>
 <ol>
-<li>
-<p>创建同步执行任务</p>
-<p><code>// 创建同步执行任务，queue为指定存放任务的队列
-dispatch_sync(queue, ^{
-    // 这里放同步执行任务代码
-});</code></p>
-</li>
-<li>
-<p>创建异步执行任务</p>
-<p><code>// 创建异步执行任务，queue为指定存放任务的队列
-dispatch_async(queue,^{
-    // 这里放异步执行任务代码
-});</code></p>
-</li>
+<li>创建同步执行任务</li>
 </ol>
-<h2 id="gcd_5">GCD的基本使用</h2>
+<div class="hlcode"><pre>    <span class="c1">// 创建同步执行任务，queue为指定存放任务的队列</span>
+    <span class="n">dispatch_sync</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
+        <span class="c1">// 这里放同步执行任务代码</span>
+    <span class="p">});</span> 
+</pre></div>
+
+
+<ol>
+<li>创建异步执行任务</li>
+</ol>
+<div class="hlcode"><pre><span class="c1">// 创建异步执行任务，queue为指定存放任务的队列</span>
+<span class="n">dispatch_async</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span><span class="o">^</span><span class="p">{</span>
+    <span class="c1">// 这里放异步执行任务代码</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<h2 id="gcd_4">GCD的基本使用</h2>
 <blockquote>
 <p>根据队列类别和任务执行方式GCD的使用有以下几种组合方式。</p>
 </blockquote>
-<p><img alt="" src="media/15239620421302/15241286723482.jpg" /></p>
 <h3 id="_5">同步执行+并行队列</h3>
 <blockquote>
 <p>在当前线程中执行任务，<strong>不会开启</strong>子线程，任务<strong>有序</strong>执行</p>
@@ -223,11 +244,11 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果<br />
-2018-04-19 17:44:08.849921+0800 GCD_Test[8535:933000] currentThread---<NSThread: 0x600000260d00>{number = 1, name = main}<br />
+2018-04-19 17:44:08.849921+0800 GCD_Test[8535:933000] currentThread---\&lt;NSThread: 0x600000260d00>{number = 1, name = main}<br />
 2018-04-19 17:44:08.850056+0800 GCD_Test[8535:933000] syncConcurrent---begin<br />
-2018-04-19 17:44:11.851112+0800 GCD_Test[8535:933000] 1---<NSThread: 0x600000260d00>{number = 1, name = main}<br />
-2018-04-19 17:44:13.852772+0800 GCD_Test[8535:933000] 2---<NSThread: 0x600000260d00>{number = 1, name = main}<br />
-2018-04-19 17:44:14.854313+0800 GCD_Test[8535:933000] 3---<NSThread: 0x600000260d00>{number = 1, name = main}<br />
+2018-04-19 17:44:11.851112+0800 GCD_Test[8535:933000] 1---\&lt;NSThread: 0x600000260d00>{number = 1, name = main}<br />
+2018-04-19 17:44:13.852772+0800 GCD_Test[8535:933000] 2---\&lt;NSThread: 0x600000260d00>{number = 1, name = main}<br />
+2018-04-19 17:44:14.854313+0800 GCD_Test[8535:933000] 3---\&lt;NSThread: 0x600000260d00>{number = 1, name = main}<br />
 2018-04-19 17:44:14.854720+0800 GCD_Test[8535:933000] syncConcurrent--------end</p>
 </blockquote>
 <p>分析：<br />
@@ -268,12 +289,12 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果：<br />
-2018-04-19 17:56:04.424675+0800 GCD_Test[8634:955301] currentThread---<NSThread: 0x600000261a00>{number = 1, name = main}<br />
+2018-04-19 17:56:04.424675+0800 GCD_Test[8634:955301] currentThread---\&lt;NSThread: 0x600000261a00>{number = 1, name = main}<br />
 2018-04-19 17:56:04.424812+0800 GCD_Test[8634:955301] asyncConcurrent---begin<br />
 2018-04-19 17:56:04.424926+0800 GCD_Test[8634:955301] syncConcurrent--------end<br />
-2018-04-19 17:56:05.425785+0800 GCD_Test[8634:955443] 任务2-耗时1秒--<NSThread: 0x600000471dc0>{number = 4, name = (null)}<br />
-2018-04-19 17:56:06.426400+0800 GCD_Test[8634:955439] 任务3-耗时2秒--<NSThread: 0x604000668900>{number = 5, name = (null)}<br />
-2018-04-19 17:56:07.427697+0800 GCD_Test[8634:955440] 任务1-耗时3秒--<NSThread: 0x6040002619c0>{number = 6, name = (null)}</p>
+2018-04-19 17:56:05.425785+0800 GCD_Test[8634:955443] 任务2-耗时1秒--\&lt;NSThread: 0x600000471dc0>{number = 4, name = (null)}<br />
+2018-04-19 17:56:06.426400+0800 GCD_Test[8634:955439] 任务3-耗时2秒--\&lt;NSThread: 0x604000668900>{number = 5, name = (null)}<br />
+2018-04-19 17:56:07.427697+0800 GCD_Test[8634:955440] 任务1-耗时3秒--\&lt;NSThread: 0x6040002619c0>{number = 6, name = (null)}</p>
 </blockquote>
 <h3 id="_7">同步执行+串行队列</h3>
 <blockquote>
@@ -307,11 +328,11 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果：<br />
-2018-04-19 18:05:59.608220+0800 GCD_Test[8736:977132] currentThread---<NSThread: 0x60400007e980>{number = 1, name = main}<br />
+2018-04-19 18:05:59.608220+0800 GCD_Test[8736:977132] currentThread---\&lt;NSThread: 0x60400007e980>{number = 1, name = main}<br />
 2018-04-19 18:05:59.608341+0800 GCD_Test[8736:977132] syncSerial---begin<br />
-2018-04-19 18:06:00.608839+0800 GCD_Test[8736:977132] 任务1--耗时1秒--<NSThread: 0x60400007e980>{number = 1, name = main}<br />
-2018-04-19 18:06:03.609289+0800 GCD_Test[8736:977132] 任务2--耗时3秒--<NSThread: 0x60400007e980>{number = 1, name = main}<br />
-2018-04-19 18:06:05.610914+0800 GCD_Test[8736:977132] 任务3--耗时2秒--<NSThread: 0x60400007e980>{number = 1, name = main}<br />
+2018-04-19 18:06:00.608839+0800 GCD_Test[8736:977132] 任务1--耗时1秒--\&lt;NSThread: 0x60400007e980>{number = 1, name = main}<br />
+2018-04-19 18:06:03.609289+0800 GCD_Test[8736:977132] 任务2--耗时3秒--\&lt;NSThread: 0x60400007e980>{number = 1, name = main}<br />
+2018-04-19 18:06:05.610914+0800 GCD_Test[8736:977132] 任务3--耗时2秒--\&lt;NSThread: 0x60400007e980>{number = 1, name = main}<br />
 2018-04-19 18:06:05.611239+0800 GCD_Test[8736:977132] syncSerial---end</p>
 </blockquote>
 <h3 id="_8">异步执行+串行</h3>
@@ -346,15 +367,15 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果：<br />
-2018-04-19 18:12:03.514190+0800 GCD_Test[8788:990727] currentThread---<NSThread: 0x60000007a9c0>{number = 1, name = main}<br />
+2018-04-19 18:12:03.514190+0800 GCD_Test[8788:990727] currentThread---\&lt;NSThread: 0x60000007a9c0>{number = 1, name = main}<br />
 2018-04-19 18:12:03.514312+0800 GCD_Test[8788:990727] asyncSerial---begin<br />
 2018-04-19 18:12:03.514409+0800 GCD_Test[8788:990727] asyncSerial---end<br />
-2018-04-19 18:12:04.515561+0800 GCD_Test[8788:991002] 任务1--耗时1秒--<NSThread: 0x600000667a40>{number = 5, name = (null)}<br />
-2018-04-19 18:12:07.516071+0800 GCD_Test[8788:991002] 任务2--耗时3秒--<NSThread: 0x600000667a40>{number = 5, name = (null)}<br />
-2018-04-19 18:12:09.521700+0800 GCD_Test[8788:991002] 任务3--耗时2秒--<NSThread: 0x600000667a40>{number = 5, name = (null)}</p>
+2018-04-19 18:12:04.515561+0800 GCD_Test[8788:991002] 任务1--耗时1秒--\&lt;NSThread: 0x600000667a40>{number = 5, name = (null)}<br />
+2018-04-19 18:12:07.516071+0800 GCD_Test[8788:991002] 任务2--耗时3秒--\&lt;NSThread: 0x600000667a40>{number = 5, name = (null)}<br />
+2018-04-19 18:12:09.521700+0800 GCD_Test[8788:991002] 任务3--耗时2秒--\&lt;NSThread: 0x600000667a40>{number = 5, name = (null)}</p>
 </blockquote>
 <h3 id="_9">同步执行+主队列</h3>
-<h4 id="_10">在主线程中调用（同步执行+主队列）</h4>
+<h4 id="_10">主线程中调用</h4>
 <blockquote>
 <p>互相等待，主线程卡死</p>
 </blockquote>
@@ -385,7 +406,7 @@ dispatch_async(queue,^{
 </pre></div>
 
 
-<h4 id="_11">在其他线程调用</h4>
+<h4 id="_11">其他线程调用</h4>
 <blockquote>
 <p>不会开启新线程，按序执行</p>
 </blockquote>
@@ -396,11 +417,11 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果<br />
-2018-04-19 18:49:13.696441+0800 GCD_Test[9146:1054660] currentThread---<NSThread: 0x604000466c40>{number = 5, name = (null)}<br />
+2018-04-19 18:49:13.696441+0800 GCD_Test[9146:1054660] currentThread---\&lt;NSThread: 0x604000466c40>{number = 5, name = (null)}<br />
 2018-04-19 18:49:13.696600+0800 GCD_Test[9146:1054660] syncMainQueue---begin<br />
-2018-04-19 18:49:14.702150+0800 GCD_Test[9146:1054248] 任务1--耗时1秒--<NSThread: 0x604000079880>{number = 1, name = main}<br />
-2018-04-19 18:49:17.705675+0800 GCD_Test[9146:1054248] 任务2--耗时2秒--<NSThread: 0x604000079880>{number = 1, name = main}<br />
-2018-04-19 18:49:19.727515+0800 GCD_Test[9146:1054248] 任务3--耗时3秒--<NSThread: 0x604000079880>{number = 1, name = main}<br />
+2018-04-19 18:49:14.702150+0800 GCD_Test[9146:1054248] 任务1--耗时1秒--\&lt;NSThread: 0x604000079880>{number = 1, name = main}<br />
+2018-04-19 18:49:17.705675+0800 GCD_Test[9146:1054248] 任务2--耗时2秒--\&lt;NSThread: 0x604000079880>{number = 1, name = main}<br />
+2018-04-19 18:49:19.727515+0800 GCD_Test[9146:1054248] 任务3--耗时3秒--\&lt;NSThread: 0x604000079880>{number = 1, name = main}<br />
 2018-04-19 18:49:19.727875+0800 GCD_Test[9146:1054660] syncMainQueue---begin</p>
 </blockquote>
 <h3 id="_12">异步执行+主队列</h3>
@@ -432,14 +453,14 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果<br />
-2018-04-19 18:57:09.221843+0800 GCD_Test[9199:1069120] currentThread---<NSThread: 0x604000067bc0>{number = 1, name = main}<br />
+2018-04-19 18:57:09.221843+0800 GCD_Test[9199:1069120] currentThread---\&lt;NSThread: 0x604000067bc0>{number = 1, name = main}<br />
 2018-04-19 18:57:09.221979+0800 GCD_Test[9199:1069120] asyncMainQueue---begin<br />
 2018-04-19 18:57:09.222149+0800 GCD_Test[9199:1069120] syncMainQueue---begin<br />
-2018-04-19 18:57:10.229029+0800 GCD_Test[9199:1069120] 任务1--耗时1秒--<NSThread: 0x604000067bc0>{number = 1, name = main}<br />
-2018-04-19 18:57:13.230537+0800 GCD_Test[9199:1069120] 任务2--耗时3秒--<NSThread: 0x604000067bc0>{number = 1, name = main}<br />
-2018-04-19 18:57:14.232182+0800 GCD_Test[9199:1069120] 任务3--耗时2秒--<NSThread: 0x604000067bc0>{number = 1, name = main}</p>
+2018-04-19 18:57:10.229029+0800 GCD_Test[9199:1069120] 任务1--耗时1秒--\&lt;NSThread: 0x604000067bc0>{number = 1, name = main}<br />
+2018-04-19 18:57:13.230537+0800 GCD_Test[9199:1069120] 任务2--耗时3秒--\&lt;NSThread: 0x604000067bc0>{number = 1, name = main}<br />
+2018-04-19 18:57:14.232182+0800 GCD_Test[9199:1069120] 任务3--耗时2秒--\&lt;NSThread: 0x604000067bc0>{number = 1, name = main}</p>
 </blockquote>
-<h2 id="gcd_6">GCD线程间的通信</h2>
+<h2 id="gcd_5">GCD线程间的通信</h2>
 <blockquote>
 <p>使用场景：比如在子线程下载数据，然后到主线程刷新界面</p>
 </blockquote>
@@ -462,11 +483,11 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果：<br />
-2018-04-19 19:09:30.741262+0800 GCD_Test[9314:1094783] --处理耗时操作---<NSThread: 0x600000474240>{number = 5, name = (null)}<br />
-2018-04-19 19:09:30.741861+0800 GCD_Test[9314:1094724] --回到主线程--<NSThread: 0x60000007c1c0>{number = 1, name = main}</p>
+2018-04-19 19:09:30.741262+0800 GCD_Test[9314:1094783] --处理耗时操作---\&lt;NSThread: 0x600000474240>{number = 5, name = (null)}<br />
+2018-04-19 19:09:30.741861+0800 GCD_Test[9314:1094724] --回到主线程--\&lt;NSThread: 0x60000007c1c0>{number = 1, name = main}</p>
 </blockquote>
-<h2 id="gcd_7">GCD的其他方法</h2>
-<h3 id="gcddispatch_barrier_async">GCD栅栏方法：dispatch_barrier_async</h3>
+<h2 id="gcd_6">GCD的其他方法</h2>
+<h3 id="dispatch95barrier95async">∑dispatch_barrier_async</h3>
 <blockquote>
 <p><code>dispatch_barrier_async()</code>方法：<strong>先执行栅栏前的任务，然后在执行栅栏中的任务，再执行栅栏后的任务</strong></p>
 </blockquote>
@@ -516,14 +537,14 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果：<br />
-2018-04-20 11:58:30.231174+0800 GCD_Test[10572:1359087] 任务2---耗时1秒--<NSThread: 0x600000279600>{number = 3, name = (null)}<br />
-2018-04-20 11:58:32.232077+0800 GCD_Test[10572:1359090] 任务1---耗时3秒--<NSThread: 0x60000047bd80>{number = 5, name = (null)}<br />
-2018-04-20 11:58:34.233081+0800 GCD_Test[10572:1359006] 栅栏---耗时2秒--<NSThread: 0x600000071340>{number = 1, name = main}<br />
-2018-04-20 11:58:35.235600+0800 GCD_Test[10572:1359090] 任务3---耗时1秒--<NSThread: 0x60000047bd80>{number = 5, name = (null)}<br />
-2018-04-20 11:58:37.237299+0800 GCD_Test[10572:1359006] 栅栏---耗时2秒--<NSThread: 0x600000071340>{number = 1, name = main}<br />
-2018-04-20 11:58:39.237854+0800 GCD_Test[10572:1359090] 任务4---耗时2秒--<NSThread: 0x60000047bd80>{number = 5, name = (null)}</p>
+2018-04-20 11:58:30.231174+0800 GCD_Test[10572:1359087] 任务2---耗时1秒--\&lt;NSThread: 0x600000279600>{number = 3, name = (null)}<br />
+2018-04-20 11:58:32.232077+0800 GCD_Test[10572:1359090] 任务1---耗时3秒--\&lt;NSThread: 0x60000047bd80>{number = 5, name = (null)}<br />
+2018-04-20 11:58:34.233081+0800 GCD_Test[10572:1359006] 栅栏---耗时2秒--\&lt;NSThread: 0x600000071340>{number = 1, name = main}<br />
+2018-04-20 11:58:35.235600+0800 GCD_Test[10572:1359090] 任务3---耗时1秒--\&lt;NSThread: 0x60000047bd80>{number = 5, name = (null)}<br />
+2018-04-20 11:58:37.237299+0800 GCD_Test[10572:1359006] 栅栏---耗时2秒--\&lt;NSThread: 0x600000071340>{number = 1, name = main}<br />
+2018-04-20 11:58:39.237854+0800 GCD_Test[10572:1359090] 任务4---耗时2秒--\&lt;NSThread: 0x60000047bd80>{number = 5, name = (null)}</p>
 </blockquote>
-<h3 id="gcddispatch_after">GCD延时执行方法：dispatch_after</h3>
+<h3 id="gcddispatch95after">GCD延时执行方法：dispatch_after</h3>
 <blockquote>
 <p><code>dispatch_after</code> :可以设定多长时间后执行任务<br />
 需要注意的是：函数并不是在指定时间后才开始执行，而是爱指定时间之后将任务追加到主队列，严格来说这个时间并不是绝对准确。</p>
@@ -543,9 +564,9 @@ dispatch_async(queue,^{
 <p>打印结果<br />
 2018-04-20 14:24:19.624885+0800 GCD_Test[11324:1481815] after----begin----<br />
 2018-04-20 14:24:19.625034+0800 GCD_Test[11324:1481815] after----end----<br />
-2018-04-20 14:24:21.738247+0800 GCD_Test[11324:1481815] after---<NSThread: 0x60000006fdc0>{number = 1, name = main}</p>
+2018-04-20 14:24:21.738247+0800 GCD_Test[11324:1481815] after---\&lt;NSThread: 0x60000006fdc0>{number = 1, name = main}</p>
 </blockquote>
-<h3 id="gcddispatch_once">GCD只执行一次代码的方法：dispatch_once</h3>
+<h3 id="gcddispatch95once">GCD只执行一次代码的方法：dispatch_once</h3>
 <blockquote>
 <p>创建<strong>单例</strong>或者有整个程序运行过程中只执行一次的代码时可以用此方法，<code>dispatch_once</code>可以保证代码在程序运行过程中只执行一次，几时在多线程环境下，也可以保证线程安全。</p>
 </blockquote>
@@ -559,7 +580,7 @@ dispatch_async(queue,^{
 </pre></div>
 
 
-<h3 id="gcddispatch_apply">GCD快速迭代方法：dispatch_apply</h3>
+<h3 id="gcddispatch95apply">GCD快速迭代方法：dispatch_apply</h3>
 <blockquote>
 <p><code>dispatch_apply</code>： 可以开启多个线程进行遍历，这在遍历数组上可以起到优化的作用，而且<code>dispatch_apply</code>会等全部任务执行完毕再继续执行后面的操作</p>
 </blockquote>
@@ -576,23 +597,23 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>2018-04-20 16:22:22.181731+0800 GCD_Test[12647:1694230] ----apply--begin----<br />
-2018-04-20 16:22:22.181958+0800 GCD_Test[12647:1694230] -----0----<NSThread: 0x600000068840>{number = 1, name = main}<br />
-2018-04-20 16:22:22.182013+0800 GCD_Test[12647:1694425] -----2----<NSThread: 0x604000264a80>{number = 3, name = (null)}<br />
-2018-04-20 16:22:22.182036+0800 GCD_Test[12647:1694427] -----3----<NSThread: 0x60000047fbc0>{number = 5, name = (null)}<br />
-2018-04-20 16:22:22.182038+0800 GCD_Test[12647:1694428] -----1----<NSThread: 0x6000004660c0>{number = 4, name = (null)}<br />
-2018-04-20 16:22:22.182131+0800 GCD_Test[12647:1694230] -----4----<NSThread: 0x600000068840>{number = 1, name = main}<br />
-2018-04-20 16:22:22.182305+0800 GCD_Test[12647:1694427] -----6----<NSThread: 0x60000047fbc0>{number = 5, name = (null)}<br />
-2018-04-20 16:22:22.182306+0800 GCD_Test[12647:1694425] -----5----<NSThread: 0x604000264a80>{number = 3, name = (null)}<br />
-2018-04-20 16:22:22.182341+0800 GCD_Test[12647:1694428] -----7----<NSThread: 0x6000004660c0>{number = 4, name = (null)}<br />
-2018-04-20 16:22:22.182380+0800 GCD_Test[12647:1694230] -----8----<NSThread: 0x600000068840>{number = 1, name = main}<br />
-2018-04-20 16:22:22.182465+0800 GCD_Test[12647:1694425] -----9----<NSThread: 0x604000264a80>{number = 3, name = (null)}<br />
+2018-04-20 16:22:22.181958+0800 GCD_Test[12647:1694230] -----0----\&lt;NSThread: 0x600000068840>{number = 1, name = main}<br />
+2018-04-20 16:22:22.182013+0800 GCD_Test[12647:1694425] -----2----\&lt;NSThread: 0x604000264a80>{number = 3, name = (null)}<br />
+2018-04-20 16:22:22.182036+0800 GCD_Test[12647:1694427] -----3----\&lt;NSThread: 0x60000047fbc0>{number = 5, name = (null)}<br />
+2018-04-20 16:22:22.182038+0800 GCD_Test[12647:1694428] -----1----\&lt;NSThread: 0x6000004660c0>{number = 4, name = (null)}<br />
+2018-04-20 16:22:22.182131+0800 GCD_Test[12647:1694230] -----4----\&lt;NSThread: 0x600000068840>{number = 1, name = main}<br />
+2018-04-20 16:22:22.182305+0800 GCD_Test[12647:1694427] -----6----\&lt;NSThread: 0x60000047fbc0>{number = 5, name = (null)}<br />
+2018-04-20 16:22:22.182306+0800 GCD_Test[12647:1694425] -----5----\&lt;NSThread: 0x604000264a80>{number = 3, name = (null)}<br />
+2018-04-20 16:22:22.182341+0800 GCD_Test[12647:1694428] -----7----\&lt;NSThread: 0x6000004660c0>{number = 4, name = (null)}<br />
+2018-04-20 16:22:22.182380+0800 GCD_Test[12647:1694230] -----8----\&lt;NSThread: 0x600000068840>{number = 1, name = main}<br />
+2018-04-20 16:22:22.182465+0800 GCD_Test[12647:1694425] -----9----\&lt;NSThread: 0x604000264a80>{number = 3, name = (null)}<br />
 2018-04-20 16:22:22.183692+0800 GCD_Test[12647:1694230] ----apply--end----</p>
 </blockquote>
-<h3 id="gcddispatch_group">GCD队列组：dispatch_group</h3>
+<h3 id="gcddispatch95group">GCD队列组：dispatch_group</h3>
 <blockquote>
 <p><code>dispatch_group</code>：GCD的队列组，可以调用<code>dispatch_group_async()</code>方法添加任务，然后按组执行</p>
 </blockquote>
-<h4 id="dispatch_group_notify">dispatch_group_notify</h4>
+<h4 id="dispatch95group95notify">dispatch_group_notify</h4>
 <blockquote>
 <p>监听group中任务的完成状态，当组中所有任务完成是，调用<code>dispatch_group_notify</code>中的代码</p>
 </blockquote>
@@ -621,12 +642,12 @@ dispatch_async(queue,^{
 
 
 <blockquote>
-<p>2018-04-20 16:38:44.548952+0800 GCD_Test[12770:1725716] ---group-begin--<NSThread: 0x600000064000>{number = 1, name = main}<br />
+<p>2018-04-20 16:38:44.548952+0800 GCD_Test[12770:1725716] ---group-begin--\&lt;NSThread: 0x600000064000>{number = 1, name = main}<br />
 2018-04-20 16:38:46.552524+0800 GCD_Test[12770:1725781] ---任务2--耗时1秒---<br />
 2018-04-20 16:38:46.552524+0800 GCD_Test[12770:1725782] ---任务1--耗时2秒---<br />
-2018-04-20 16:38:46.552835+0800 GCD_Test[12770:1725716] ---group-end--<NSThread: 0x600000064000>{number = 1, name = main}</p>
+2018-04-20 16:38:46.552835+0800 GCD_Test[12770:1725716] ---group-end--\&lt;NSThread: 0x600000064000>{number = 1, name = main}</p>
 </blockquote>
-<h4 id="dispatch_group_wait">dispatch_group_wait</h4>
+<h4 id="dispatch95group95wait">dispatch_group_wait</h4>
 <blockquote>
 <p>暂停阻塞当前线程，等待指定的group中完成任务后再继续往下执行。</p>
 </blockquote>
@@ -652,12 +673,12 @@ dispatch_async(queue,^{
 
 
 <blockquote>
-<p>2018-04-20 16:54:41.180500+0800 GCD_Test[12970:1757380] ----wait---begin---<NSThread: 0x604000079140>{number = 1, name = main}<br />
-2018-04-20 16:54:42.181933+0800 GCD_Test[12970:1757447] ---任务2--耗时1秒---<NSThread: 0x604000276180>{number = 3, name = (null)}<br />
-2018-04-20 16:54:45.182507+0800 GCD_Test[12970:1757448] ---任务1--耗时4秒---<NSThread: 0x60400027f640>{number = 4, name = (null)}<br />
-2018-04-20 16:54:45.183019+0800 GCD_Test[12970:1757380] ----wait---end---<NSThread: 0x604000079140>{number = 1, name = main}</p>
+<p>2018-04-20 16:54:41.180500+0800 GCD_Test[12970:1757380] ----wait---begin---\&lt;NSThread: 0x604000079140>{number = 1, name = main}<br />
+2018-04-20 16:54:42.181933+0800 GCD_Test[12970:1757447] ---任务2--耗时1秒---\&lt;NSThread: 0x604000276180>{number = 3, name = (null)}<br />
+2018-04-20 16:54:45.182507+0800 GCD_Test[12970:1757448] ---任务1--耗时4秒---\&lt;NSThread: 0x60400027f640>{number = 4, name = (null)}<br />
+2018-04-20 16:54:45.183019+0800 GCD_Test[12970:1757380] ----wait---end---\&lt;NSThread: 0x604000079140>{number = 1, name = main}</p>
 </blockquote>
-<h4 id="dispatch_group_enterdispatch_group_leave">dispatch_group_enter、dispatch_group_leave</h4>
+<h4 id="dispatch95group95enterdispatch95group95leave">dispatch_group_enter、dispatch_group_leave</h4>
 <blockquote>
 <p><code>dispatch_group_enter</code>类似于<strong>对象引用计数</strong>的<code>retain</code>每调用一次group的引用计数加一，<code>dispatch_group_leave</code>类似于<strong>对象引用计数</strong>的<code>release</code>没调用一次引用计数减一，当引用计数为0时，<code>dispatch_group_wait</code>会解除，然后调用<code>dispatch_group_notify</code><br />
 <code>dispatch_group_enter、dispatch_group_leave</code>的组合使用其实相当于<code>dispatch_group_async</code></p>
@@ -690,27 +711,23 @@ dispatch_async(queue,^{
 
 
 <blockquote>
-<p>2018-04-20 17:21:27.634479+0800 GCD_Test[13266:1816278] --enter--begin--<NSThread: 0x60400007ef00>{number = 1, name = main}<br />
-2018-04-20 17:21:28.639462+0800 GCD_Test[13266:1816382] ---任务2--耗时1秒---<NSThread: 0x600000279140>{number = 4, name = (null)}<br />
-2018-04-20 17:21:30.638860+0800 GCD_Test[13266:1816380] ---任务1--耗时3秒---<NSThread: 0x60400047fe00>{number = 5, name = (null)}<br />
-2018-04-20 17:21:30.639271+0800 GCD_Test[13266:1816278] ----wait--end--<NSThread: 0x60400007ef00>{number = 1, name = main}<br />
-2018-04-20 17:21:30.672949+0800 GCD_Test[13266:1816278] ----notify---end---<NSThread: 0x60400007ef00>{number = 1, name = main}</p>
+<p>2018-04-20 17:21:27.634479+0800 GCD_Test[13266:1816278] --enter--begin--\&lt;NSThread: 0x60400007ef00>{number = 1, name = main}<br />
+2018-04-20 17:21:28.639462+0800 GCD_Test[13266:1816382] ---任务2--耗时1秒---\&lt;NSThread: 0x600000279140>{number = 4, name = (null)}<br />
+2018-04-20 17:21:30.638860+0800 GCD_Test[13266:1816380] ---任务1--耗时3秒---\&lt;NSThread: 0x60400047fe00>{number = 5, name = (null)}<br />
+2018-04-20 17:21:30.639271+0800 GCD_Test[13266:1816278] ----wait--end--\&lt;NSThread: 0x60400007ef00>{number = 1, name = main}<br />
+2018-04-20 17:21:30.672949+0800 GCD_Test[13266:1816278] ----notify---end---\&lt;NSThread: 0x60400007ef00>{number = 1, name = main}</p>
 </blockquote>
-<h3 id="gcddispatch_semaphore">GCD信号量：dispatch_semaphore</h3>
+<h3 id="gcddispatch95semaphore">GCD信号量：dispatch_semaphore</h3>
 <blockquote>
 <p>GCD中的信号量是指<strong>Dispatch Semaphore</strong>，是持有计数的信号，编程人员可以通过控制<code>dispatch_semaphore_t</code>的信号计数，从而<strong>控制线程代码的执行</strong></p>
 </blockquote>
 <ul>
-<li>
-<p>使用场景</p>
-<ol>
+<li>使用场景<ol>
 <li><strong>保持线程同步，将异步执行任务转到同步执行</strong></li>
 <li><strong>保证线程安全，为线程加锁</strong></li>
 </ol>
 </li>
-<li>
-<p><code>dispatch_semaphore</code>主要有三个函数：</p>
-<ul>
+<li><code>dispatch_semaphore</code>主要有三个函数：<ul>
 <li><code>dispatch_semaphore_create(long value)</code>：初始化信号计数并返回一个<code>dispatch_semaphore_t</code>信号量</li>
 <li><code>dispatch_semphore_signal</code>：发送一个信号，让信号总量加1</li>
 <li><code>dispatch_semphore_wait</code>：当信号量为0时会一直等待（阻塞当前线程），否则正常运行，每运行一次会使信号总量减一。</li>
@@ -762,7 +779,7 @@ dispatch_async(queue,^{
 </ul>
 <div class="hlcode"><pre><span class="cp">#pragma mark - 不考虑线程安全的情况</span>
 <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">shopTick</span> <span class="p">{</span>
-<span class="c1">//    NSLog(@&quot;----0000----%@&quot;,[NSThread currentThread]);</span>
+<span class="c1">//    NSLog(@&quot;----0000----%@&quot;,[NSThread currentThread]);</span>
     <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;----00000------%@&quot;</span><span class="p">,[</span><span class="n">NSThread</span> <span class="n">currentThread</span><span class="p">]);</span>
     <span class="n">self</span><span class="p">.</span><span class="n">tickCount</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
     <span class="c1">// 创建上海队列</span>
@@ -797,28 +814,28 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>打印结果：<br />
-2018-04-21 16:29:18.566294+0800 GCD_Test[20249:2807585] ----00000------<NSThread: 0x60400007d800>{number = 1, name = main}<br />
-2018-04-21 16:29:18.566609+0800 GCD_Test[20249:2807784] 剩余票数：9 窗口：<NSThread: 0x600000475480>{number = 3, name = (null)}<br />
-2018-04-21 16:29:18.566615+0800 GCD_Test[20249:2807785] 剩余票数：8 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
-2018-04-21 16:29:18.768913+0800 GCD_Test[20249:2807784] 剩余票数：7 窗口：<NSThread: 0x600000475480>{number = 3, name = (null)}<br />
-2018-04-21 16:29:18.768913+0800 GCD_Test[20249:2807785] 剩余票数：6 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
-2018-04-21 16:29:18.972331+0800 GCD_Test[20249:2807784] 剩余票数：5 窗口：<NSThread: 0x600000475480>{number = 3, name = (null)}<br />
-2018-04-21 16:29:18.972333+0800 GCD_Test[20249:2807785] 剩余票数：5 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
-2018-04-21 16:29:19.175883+0800 GCD_Test[20249:2807784] 剩余票数：3 窗口：<NSThread: 0x600000475480>{number = 3, name = (null)}<br />
-2018-04-21 16:29:19.175888+0800 GCD_Test[20249:2807785] 剩余票数：4 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
-2018-04-21 16:29:19.380030+0800 GCD_Test[20249:2807785] 剩余票数：2 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
-2018-04-21 16:29:19.380030+0800 GCD_Test[20249:2807784] 剩余票数：2 窗口：<NSThread: 0x600000475480>{number = 3, name = (null)}<br />
-2018-04-21 16:29:19.584104+0800 GCD_Test[20249:2807784] 剩余票数：1 窗口：<NSThread: 0x600000475480>{number = 3, name = (null)}<br />
-2018-04-21 16:29:19.584104+0800 GCD_Test[20249:2807785] 剩余票数：1 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:18.566294+0800 GCD_Test[20249:2807585] ----00000------\&lt;NSThread: 0x60400007d800>{number = 1, name = main}<br />
+2018-04-21 16:29:18.566609+0800 GCD_Test[20249:2807784] 剩余票数：9 窗口：\&lt;NSThread: 0x600000475480>{number = 3, name = (null)}<br />
+2018-04-21 16:29:18.566615+0800 GCD_Test[20249:2807785] 剩余票数：8 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:18.768913+0800 GCD_Test[20249:2807784] 剩余票数：7 窗口：\&lt;NSThread: 0x600000475480>{number = 3, name = (null)}<br />
+2018-04-21 16:29:18.768913+0800 GCD_Test[20249:2807785] 剩余票数：6 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:18.972331+0800 GCD_Test[20249:2807784] 剩余票数：5 窗口：\&lt;NSThread: 0x600000475480>{number = 3, name = (null)}<br />
+2018-04-21 16:29:18.972333+0800 GCD_Test[20249:2807785] 剩余票数：5 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:19.175883+0800 GCD_Test[20249:2807784] 剩余票数：3 窗口：\&lt;NSThread: 0x600000475480>{number = 3, name = (null)}<br />
+2018-04-21 16:29:19.175888+0800 GCD_Test[20249:2807785] 剩余票数：4 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:19.380030+0800 GCD_Test[20249:2807785] 剩余票数：2 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:19.380030+0800 GCD_Test[20249:2807784] 剩余票数：2 窗口：\&lt;NSThread: 0x600000475480>{number = 3, name = (null)}<br />
+2018-04-21 16:29:19.584104+0800 GCD_Test[20249:2807784] 剩余票数：1 窗口：\&lt;NSThread: 0x600000475480>{number = 3, name = (null)}<br />
+2018-04-21 16:29:19.584104+0800 GCD_Test[20249:2807785] 剩余票数：1 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
 2018-04-21 16:29:19.789115+0800 GCD_Test[20249:2807784] 所有火车票均已售完<br />
-2018-04-21 16:29:19.789121+0800 GCD_Test[20249:2807785] 剩余票数：0 窗口：<NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
+2018-04-21 16:29:19.789121+0800 GCD_Test[20249:2807785] 剩余票数：0 窗口：\&lt;NSThread: 0x6000004753c0>{number = 4, name = (null)}<br />
 2018-04-21 16:29:19.992451+0800 GCD_Test[20249:2807785] 所有火车票均已售完</p>
 </blockquote>
 <ul>
 <li>考虑线程安全的情况下</li>
 </ul>
 <div class="hlcode"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">shopTick</span> <span class="p">{</span>
-<span class="c1">//    NSLog(@&quot;----0000----%@&quot;,[NSThread currentThread]);</span>
+<span class="c1">//    NSLog(@&quot;----0000----%@&quot;,[NSThread currentThread]);</span>
     <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;----00000------%@&quot;</span><span class="p">,[</span><span class="n">NSThread</span> <span class="n">currentThread</span><span class="p">]);</span>
     <span class="n">self</span><span class="p">.</span><span class="n">tickCount</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
     <span class="c1">// 初始化信号量</span>
@@ -860,17 +877,17 @@ dispatch_async(queue,^{
 
 <blockquote>
 <p>执行结果<br />
-2018-04-21 17:22:01.462763+0800 GCD_Test[20462:2845077] ----00000------<NSThread: 0x60000006cdc0>{number = 1, name = main}<br />
-2018-04-21 17:22:01.463025+0800 GCD_Test[20462:2845298] 剩余票数：9 窗口：<NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
-2018-04-21 17:22:01.667396+0800 GCD_Test[20462:2845296] 剩余票数：8 窗口：<NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
-2018-04-21 17:22:01.870932+0800 GCD_Test[20462:2845298] 剩余票数：7 窗口：<NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
-2018-04-21 17:22:02.073737+0800 GCD_Test[20462:2845296] 剩余票数：6 窗口：<NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
-2018-04-21 17:22:02.278715+0800 GCD_Test[20462:2845298] 剩余票数：5 窗口：<NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
-2018-04-21 17:22:02.482867+0800 GCD_Test[20462:2845296] 剩余票数：4 窗口：<NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
-2018-04-21 17:22:02.686127+0800 GCD_Test[20462:2845298] 剩余票数：3 窗口：<NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
-2018-04-21 17:22:02.887050+0800 GCD_Test[20462:2845296] 剩余票数：2 窗口：<NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
-2018-04-21 17:22:03.091466+0800 GCD_Test[20462:2845298] 剩余票数：1 窗口：<NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
-2018-04-21 17:22:03.295766+0800 GCD_Test[20462:2845296] 剩余票数：0 窗口：<NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
+2018-04-21 17:22:01.462763+0800 GCD_Test[20462:2845077] ----00000------\&lt;NSThread: 0x60000006cdc0>{number = 1, name = main}<br />
+2018-04-21 17:22:01.463025+0800 GCD_Test[20462:2845298] 剩余票数：9 窗口：\&lt;NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
+2018-04-21 17:22:01.667396+0800 GCD_Test[20462:2845296] 剩余票数：8 窗口：\&lt;NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
+2018-04-21 17:22:01.870932+0800 GCD_Test[20462:2845298] 剩余票数：7 窗口：\&lt;NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
+2018-04-21 17:22:02.073737+0800 GCD_Test[20462:2845296] 剩余票数：6 窗口：\&lt;NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
+2018-04-21 17:22:02.278715+0800 GCD_Test[20462:2845298] 剩余票数：5 窗口：\&lt;NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
+2018-04-21 17:22:02.482867+0800 GCD_Test[20462:2845296] 剩余票数：4 窗口：\&lt;NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
+2018-04-21 17:22:02.686127+0800 GCD_Test[20462:2845298] 剩余票数：3 窗口：\&lt;NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
+2018-04-21 17:22:02.887050+0800 GCD_Test[20462:2845296] 剩余票数：2 窗口：\&lt;NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
+2018-04-21 17:22:03.091466+0800 GCD_Test[20462:2845298] 剩余票数：1 窗口：\&lt;NSThread: 0x60400026d800>{number = 3, name = (null)}<br />
+2018-04-21 17:22:03.295766+0800 GCD_Test[20462:2845296] 剩余票数：0 窗口：\&lt;NSThread: 0x60400026de00>{number = 4, name = (null)}<br />
 2018-04-21 17:22:03.499228+0800 GCD_Test[20462:2845298] 所有火车票均已售完<br />
 2018-04-21 17:22:03.499457+0800 GCD_Test[20462:2845296] 所有火车票均已售完</p>
 </blockquote>
@@ -884,15 +901,15 @@ dispatch_async(queue,^{
 </ul>
 </blockquote>
     </div>
-    <div id="footer">
-      <span>
-        <p>Copyright © 2018 .
-        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2018-04-25 15:26:43</p>
-      </span>
-    </div>
 
-    
-    
-  </body>
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-04-26 15:21:16</p>
+        </div>
+    </body>
 </html>

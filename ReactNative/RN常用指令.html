@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>RN常用指令 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#ReactNative">ReactNative</a> » RN常用指令
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="hlcode"><pre><span class="c1">//查看当前reactNative版本</span>
+<span class="n">react</span><span class="o">-</span><span class="n">native</span> <span class="o">--</span><span class="n">v</span>
+<span class="c1">//更新全局rn到最新版</span>
+<span class="n">sudo</span> <span class="n">npm</span> <span class="n">update</span> <span class="o">-</span><span class="n">g</span> <span class="n">react</span><span class="o">-</span><span class="n">native</span><span class="o">-</span><span class="n">cli</span>
+<span class="c1">//查看服务器端rn各版本的信息</span>
+<span class="n">npm</span> <span class="n">info</span> <span class="n">react</span><span class="o">-</span><span class="n">native</span>
+<span class="c1">// 根据配置的package.json给下载的工程项目下载安装rn环境</span>
+<span class="n">npm</span> <span class="n">install</span>
+<span class="c1">// 根据package.json配置的rn版本，更新rn环境代码</span>
+<span class="n">react</span><span class="o">-</span><span class="n">native</span> <span class="n">upgrade</span>
+<span class="c1">// 运行ios工程</span>
+<span class="n">react</span><span class="o">-</span><span class="n">native</span> <span class="n">run</span><span class="o">-</span><span class="n">ios</span>
+<span class="c1">// 运行android工程</span>
+<span class="n">react</span><span class="o">-</span><span class="n">native</span> <span class="n">run</span><span class="o">-</span><span class="n">android</span>
+<span class="c1">// 初始化一个工程，下载react-native 的所有源代码和依赖包</span>
+<span class="n">react</span><span class="o">-</span><span class="n">native</span> <span class="n">init</span> <span class="err">工程名</span>
+<span class="c1">// 项目降级或升级到指定版本，记得之后要运行一下react-native upgrade 更新一下项目依赖等</span>
+<span class="n">npm</span> <span class="n">install</span> <span class="o">--</span><span class="n">save</span> <span class="n">react</span><span class="o">-</span><span class="n">native</span> <span class="p">@</span><span class="mf">0.18</span>
+<span class="c1">// 安装某个lib到项目中</span>
+<span class="n">npm</span> <span class="n">install</span> <span class="n">react</span><span class="o">-</span><span class="n">native</span><span class="o">-</span><span class="n">storage</span> <span class="o">--</span><span class="n">save</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-04-26 15:21:16</p>
+        </div>
+    </body>
+</html>
