@@ -60,30 +60,37 @@
 <ul>
 <li><strong>修饰局部变量：</strong>保证局部变量只初始化一次。</li>
 </ul>
-<p><code>for (int k=0; k&lt;2; k++) {
-   static int i = 1;
-    i++;
-    NSLog(@"i的值=%d",i);
-}
-输出：
-i的值=2
-i的值=3</code></p>
-<ul>
-<li><strong>修饰全局变量：</strong>使全局变量的作用域仅限于当前文件内，比较典型的是使用GCD一次性函数创建的单例</li>
+</li>
 </ul>
-<p><code>//static修饰全局变量，让外界文件无法访问
-static LoginTool *_sharedManager = nil;
-+ (LoginTool *)sharedManager {   
-   static dispatch_once_t oncePredicate;   
-   dispatch_once(&amp;oncePredicate, ^{
-        _sharedManager = [[self alloc] init];
-    });   
-   return _sharedManager;
-}</code></p>
-</li>
-<li>
-<p>extern: <strong>将变量访问范围扩展</strong>，我们可以在.h文件中extern声明一些全局的常量，在.m文件中实现或赋值，这样，只要导入头文件，就可以全局的使用定义的变量或常量。</p>
-</li>
+<div class="hlcode"><pre>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;i的值=%d&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="err">输出：</span>
+    <span class="n">i</span><span class="err">的值</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">i</span><span class="err">的值</span><span class="o">=</span><span class="mi">3</span>
+</pre></div>
+
+
+<div class="hlcode"><pre><span class="o">-</span> <span class="o">**</span><span class="err">修饰全局变量：</span><span class="o">**</span><span class="err">使全局变量的作用域仅限于当前文件内，比较典型的是使用</span><span class="n">GCD</span><span class="err">一次性函数创建的单例</span>
+</pre></div>
+
+
+<div class="hlcode"><pre>    <span class="c1">//static修饰全局变量，让外界文件无法访问</span>
+    <span class="k">static</span> <span class="n">LoginTool</span> <span class="o">*</span><span class="n">_sharedManager</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="o">+</span> <span class="p">(</span><span class="n">LoginTool</span> <span class="o">*</span><span class="p">)</span><span class="n">sharedManager</span> <span class="p">{</span>   
+       <span class="k">static</span> <span class="kt">dispatch_once_t</span> <span class="n">oncePredicate</span><span class="p">;</span>   
+       <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">oncePredicate</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
+            <span class="n">_sharedManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">});</span>   
+       <span class="k">return</span> <span class="n">_sharedManager</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>extern: <strong>将变量访问范围扩展</strong>，我们可以在.h文件中extern声明一些全局的常量，在.m文件中实现或赋值，这样，只要导入头文件，就可以全局的使用定义的变量或常量。</li>
 </ul>
 <div class="hlcode"><pre><span class="c1">//声明一些全局常量</span>
 <span class="k">extern</span> <span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">name</span><span class="p">;</span>
@@ -125,7 +132,7 @@ static LoginTool *_sharedManager = nil;
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-05-15 15:23:45</p>
+                <p>Last Update 2018-05-15 15:33:53</p>
         </div>
     </body>
 </html>
