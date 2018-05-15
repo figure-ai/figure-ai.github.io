@@ -55,6 +55,26 @@
 </ul>
 </li>
 </ol>
+<p>3.yoga模块报错<code>Implicit conversion loses integer precision: 'size_type' (aka 'unsigned long') to 'const uint32_t' (aka 'const unsigned int')</code></p>
+<ul>
+<li>
+<p>解决方法：在podfile文件中加入以下代码</p>
+<p><code>post_install do |installer|
+installer.pods_project.targets.each do |target|
+    if target.name == 'yoga'
+        target.build_configurations.each do |config|
+            config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+            config.build_settings['GCC_WARN_64_TO_32_BIT_CONVERSION'] = 'NO'
+        end
+    end
+end
+end</code></p>
+</li>
+<li>
+<p><code>tries to require 'react-native', but there are several files providing this module. You can delete or fix them:</code></p>
+</li>
+</ul>
+<p><code>重复添加依赖库，把profile中添加的库改成手动添加即可。</code></p>
     </div>
 
         </div>
@@ -64,7 +84,7 @@
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-04-26 15:21:16</p>
+                <p>Last Update 2018-05-15 10:04:10</p>
         </div>
     </body>
 </html>
