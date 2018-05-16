@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>Autorelease pool - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » Autorelease pool
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">相关知识</a></li>
+<li><a href="#_2">其他知识</a></li>
+</ul>
+</div>
+<h2 id="_1">相关知识</h2>
+<ol>
+<li>
+<p>autorelease pool什么时候创建</p>
+<blockquote>
+<p>在NSRunLoop对象的每个<strong>运行循环（event loop）</strong>开始前，系统会自动创建一个autoreleasepool</p>
+</blockquote>
+</li>
+<li>
+<p>autorelease pool 什么时候释放</p>
+<blockquote>
+<p>在<strong>没有手动添加Autorelease Pool</strong> 的情况下，autorelease pool 会在<strong>当前runloop迭代结束时</strong>释放。</p>
+</blockquote>
+</li>
+<li>
+<p>autorelease pool 做了什么</p>
+<blockquote>
+<p>Autorelease Pool释放时，添加进pool的对象也会随之释放</p>
+</blockquote>
+</li>
+<li>
+<p>NSThread、NSRunLoop、NSAutoreleasePool三者之间的关系</p>
+<ol>
+<li>NSThread和NSRunLoop是<strong>一一对应的关系</strong></li>
+<li>在NSRunLoop每个<strong>运行循环开始前</strong>，系统会自动创建一个autoreleasepool，并在<strong>运行循环结束时drain掉这个pool</strong>同时是释放掉所有autoreleased对象</li>
+<li>autorelease pool只会对应个线程，每个线程可以对应多个autorelease pool，比如autorelease pool嵌套的情况</li>
+</ol>
+</li>
+<li>
+<p>需要<strong>手动添加</strong>autoreleasepool的情况</p>
+<ol>
+<li>如果你编写的程序<strong>不是基于UI框架的</strong>，比如命令行工具</li>
+<li>for循环遍历中产生<strong>大量autorelease变量时</strong></li>
+<li><strong>创建了一个子线程</strong>，一般会自定义<strong>继承自NSOpreation的操作</strong>，这段代码是在子线程上执行的无法访问主线程的自动释放池，所以得自己创建。在main方法中要加上<strong>@autoreleasepool{...}</strong>。</li>
+<li><strong>长时间在后台运行的任务</strong></li>
+</ol>
+</li>
+</ol>
+<h2 id="_2">其他知识</h2>
+<ol>
+<li>使用容器的block的枚举器时，内部会自动添加一个autoreleasepool</li>
+</ol>
+<div class="hlcode"><pre><span class="p">[</span><span class="n">array</span> <span class="n">enumerateObjectsUsingBlock</span><span class="o">:^</span><span class="p">(</span><span class="kt">id</span> <span class="n">obj</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">ind</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 这里会被一个局部@autoreleasepool{}包裹着</span>
+<span class="p">}];</span>
+</pre></div>
+
+
+<ol>
+<li>普通的<strong>for循环</strong>和<strong>for-in循环</strong>中没有，但是性能还是<strong>for-in</strong>最高</li>
+</ol>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-05-16 16:51:48</p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>Xcode编译原理 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » Xcode编译原理
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <p>Clang作为编译器的前端<br />
+LLVM（Low Level vritual machine）作为编译器的后端</p>
+<h3 id="clang">编译器前端（Clang）</h3>
+<blockquote>
+<p>负责语法分析，语义分析，生成中间代码，这个过程会进行类型检查，如果发现错误或者警告就会标注出来在哪一行</p>
+</blockquote>
+<h3 id="llvm">编译器后端（LLVM）</h3>
+<blockquote>
+<p>进行机器无关的代码优化，生成机器语言，并且进行机器相关的代码优化。后端的处理如下</p>
+</blockquote>
+<ol>
+<li>
+<p>LLVM优化器会进行BitCode的生成，链接期的优化等等<br />
+<img alt="" src="media/15158230631000/15158242190406.jpg" /></p>
+</li>
+<li>
+<p>LLVM机器码生成器会针对不同的架构，比如arm64生成不同的机器码<br />
+<img alt="" src="media/15158230631000/15158242081033.jpg" /></p>
+</li>
+</ol>
+<h2 id="xcode-build">执行一次XCode build的流程</h2>
+<ol>
+<li>编译信息写入辅助文件，创建编译后的文件架构（name.app）</li>
+<li>处理文件打包信息</li>
+<li>执行CocoaPod编译前脚本<ul>
+<li>例如对于使用CocoaPod的工程会执行CheckPods Manifest.lock</li>
+</ul>
+</li>
+<li>编译各个.m文件，使用CompileC和clang命令</li>
+<li>链接需要的Framework</li>
+<li>编译xib文件</li>
+<li>拷贝xib，图片等资源文件到结果目录</li>
+<li>编译ImageAssets</li>
+<li>处理info.plist</li>
+<li>执行CocoaPod脚本</li>
+<li>拷贝Swift标准库</li>
+<li>创建.app文件并对其签名</li>
+</ol>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-05-16 16:51:48</p>
+        </div>
+    </body>
+</html>
