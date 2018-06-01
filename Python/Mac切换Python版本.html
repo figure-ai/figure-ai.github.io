@@ -5,7 +5,7 @@
         <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-        <title>Xcode编译原理 - </title>
+        <title>Mac切换Python版本 - </title>
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,50 +33,40 @@
         <div id="post-nav">
             <div id="toggle-button">宽版</div>
             
-            <a href="/">Home</a> » <a href="/#OC">OC</a> » Xcode编译原理
+            <a href="/">Home</a> » <a href="/#Python">Python</a> » Mac切换Python版本
             
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <p>Clang作为编译器的前端<br />
-LLVM（Low Level vritual machine）作为编译器的后端</p>
-<h3 id="clang">编译器前端（Clang）</h3>
-<blockquote>
-<p>负责语法分析，语义分析，生成中间代码，这个过程会进行类型检查，如果发现错误或者警告就会标注出来在哪一行</p>
-</blockquote>
-<h3 id="llvm">编译器后端（LLVM）</h3>
-<blockquote>
-<p>进行机器无关的代码优化，生成机器语言，并且进行机器相关的代码优化。后端的处理如下</p>
-</blockquote>
+        <h1 id="macpython">Mac切换Python版本</h1>
 <ol>
-<li>
-<p>LLVM优化器会进行BitCode的生成，链接期的优化等等<br />
-<img alt="" src="media/15158230631000/15158242190406.jpg" /></p>
-</li>
-<li>
-<p>LLVM机器码生成器会针对不同的架构，比如arm64生成不同的机器码<br />
-<img alt="" src="media/15158230631000/15158242081033.jpg" /></p>
-</li>
+<li>查看本机python目录</li>
 </ol>
-<h2 id="xcode-build">执行一次XCode build的流程</h2>
+<div class="hlcode"><pre><span class="n">which</span> <span class="n">python3</span><span class="mf">.6</span>
+<span class="c1">// ／usr/local/bin/python3.6</span>
+</pre></div>
+
+
 <ol>
-<li>编译信息写入辅助文件，创建编译后的文件架构（name.app）</li>
-<li>处理文件打包信息</li>
-<li>执行CocoaPod编译前脚本<ul>
-<li>例如对于使用CocoaPod的工程会执行CheckPods Manifest.lock</li>
-</ul>
-</li>
-<li>编译各个.m文件，使用CompileC和clang命令</li>
-<li>链接需要的Framework</li>
-<li>编译xib文件</li>
-<li>拷贝xib，图片等资源文件到结果目录</li>
-<li>编译ImageAssets</li>
-<li>处理info.plist</li>
-<li>执行CocoaPod脚本</li>
-<li>拷贝Swift标准库</li>
-<li>创建.app文件并对其签名</li>
+<li>修改bashrc配置文件</li>
 </ol>
+<div class="hlcode"><pre><span class="n">vi</span> <span class="o">~/</span><span class="p">.</span><span class="n">bashrc</span>
+</pre></div>
+
+
+<ol>
+<li>想要为某个特定用户修改 Python 版本，只需要在其 home 目录下创建一个 alias(别名) 即可。打开该用户的 ~/.bashrc 文件，添加新的别名信息来修改默认使用的 Python 版本。</li>
+</ol>
+<div class="hlcode"><pre><span class="n">alias</span> <span class="n">python</span><span class="o">=</span><span class="err">&#39;</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="err">&#39;</span>
+</pre></div>
+
+
+<ol>
+<li>验证</li>
+</ol>
+<div class="hlcode"><pre><span class="n">python</span>
+</pre></div>
     </div>
 
         </div>
