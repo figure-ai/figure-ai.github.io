@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>tableview优化技巧 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » tableview优化技巧
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <ul>
+<li>预排版</li>
+</ul>
+<div class="hlcode"><pre><span class="err">在后台计算好布局属性，减少</span><span class="n">tableview</span><span class="err">在请求各个</span><span class="n">cell</span><span class="err">的高度时的计算量</span>
+</pre></div>
+
+
+<ul>
+<li>预渲染</li>
+</ul>
+<div class="hlcode"><pre><span class="err">在后台线程将头像预先渲染为圆形并单独保存到一个</span> <span class="n">ImageCache</span> <span class="err">中去。</span>
+<span class="err">尽量避免使用</span> <span class="n">layer</span> <span class="err">的</span> <span class="n">border</span><span class="err">、</span><span class="n">corner</span><span class="err">、</span><span class="n">shadow</span><span class="err">、</span><span class="n">mask</span> <span class="err">等技术，而尽量在后台线程预先绘制好对应内容。</span>
+</pre></div>
+
+
+<ul>
+<li>异步绘制</li>
+</ul>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-06-01 16:21:08</p>
+        </div>
+    </body>
+</html>
