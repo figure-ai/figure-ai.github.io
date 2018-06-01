@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>html - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#前端">前端</a> » html
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <ul>
+<li>html</li>
+</ul>
+<div class="hlcode"><pre><span class="c">&lt;!--文本符--&gt;</span>
+<span class="nt">&lt;p&gt;</span> 段落文本 <span class="nt">&lt;/p&gt;</span>
+
+<span class="c">&lt;!--标题符--&gt;</span>
+<span class="nt">&lt;h1&gt;</span> 一级标题 <span class="nt">&lt;h1/&gt;</span>
+...
+<span class="nt">&lt;h6&gt;</span> 六级标题 <span class="nt">&lt;h6/&gt;</span>
+
+<span class="c">&lt;!--文本粗体--&gt;</span>
+<span class="nt">&lt;strong&gt;</span> 文本粗体 <span class="nt">&lt;/strong&gt;</span>
+
+<span class="c">&lt;!--文本斜体--&gt;</span>
+<span class="nt">&lt;em&gt;</span> 文本斜体 <span class="nt">&lt;em/&gt;</span>
+
+<span class="c">&lt;!--自定义的文本样式--&gt;</span>
+<span class="nt">&lt;span&gt;</span> 设置自定义的文本样式 <span class="nt">&lt;/span&gt;</span>
+
+<span class="c">&lt;!--引用文本--&gt;</span>
+<span class="nt">&lt;q&gt;</span> 引用文本（为文本添加一个双引号） <span class="nt">&lt;/q&gt;</span>
+
+<span class="c">&lt;!--长文本的引用--&gt;</span>
+<span class="nt">&lt;blockquote&gt;</span> 长文本的引用（诗词歌赋等） <span class="nt">&lt;/blockquote&gt;</span>
+
+<span class="c">&lt;!--文本换行符--&gt;</span>
+<span class="nt">&lt;br/&gt;</span> 
+
+<span class="c">&lt;!--空格符--&gt;</span>
+<span class="ni">&amp;nbsp;</span>  
+
+<span class="c">&lt;!--分割线  默认粗灰色--&gt;</span>
+<span class="nt">&lt;hr/&gt;</span> 
+
+<span class="c">&lt;!--地址标签--&gt;</span>
+<span class="nt">&lt;address&gt;</span>地址标签  默认样式为斜体<span class="nt">&lt;/address&gt;</span>
+
+<span class="c">&lt;!--代码标签--&gt;</span>
+<span class="nt">&lt;code&gt;</span> 代码标签  如果多行的话可以使用<span class="nt">&lt;pre&gt;</span> <span class="nt">&lt;/code&gt;</span>
+
+<span class="c">&lt;!--代码标签--&gt;</span>
+<span class="nt">&lt;pre&gt;</span> 代码标签 多行 <span class="nt">&lt;/pre&gt;</span>
+
+<span class="c">&lt;!--无序列表--&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>列表项一  默认样式为自带一个原点<span class="nt">&lt;/li&gt;</span>
+    ...
+<span class="nt">&lt;/ul&gt;</span>
+
+<span class="c">&lt;!--有序列表 默认样式1.2.3....--&gt;</span>
+<span class="nt">&lt;ol&gt;</span>
+    <span class="nt">&lt;li&gt;</span>信息1<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>信息2<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>信息3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ol&gt;</span>
+
+<span class="c">&lt;!--布局块 类似iOS的view控件--&gt;</span>
+<span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!--表格 默认没有表格线--&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">summary=</span><span class="s">&quot;表格的简介，不会在浏览器上显示&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!--表格的标题--&gt;</span>
+    <span class="nt">&lt;caption&gt;</span>表格的标题文本<span class="nt">&lt;/caption&gt;</span>
+    <span class="c">&lt;!--加了tbody可以使表格加载多少显示多少，否则需等待整个表格加载完成再显示，--&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+        <span class="c">&lt;!--表格的一行--&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="c">&lt;!--表格的表头--&gt;</span>
+            <span class="nt">&lt;th&gt;&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="c">&lt;!--表格的普通行--&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="c">&lt;!--链接 默认颜色为蓝色有下划线--&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;目标网址&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span> <span class="na">title=</span><span class="s">&quot;鼠标滑过显示的文本&quot;</span><span class="nt">&gt;</span>链接显示的文本<span class="nt">&lt;/a&gt;</span>
+
+<span class="c">&lt;!--在新建窗口打开链接--&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+
+<span class="c">&lt;!--使用mailto链接邮件地址 --&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;mailto:xxx@qq.com;xxx@gmail.com?cc=抄送地址&amp;bcc= 密件抄送地址&amp;subject=邮件主题&amp;body=邮件内容&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+
+<span class="c">&lt;!--图片--&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;图片地址&quot;</span> <span class="na">alt=</span><span class="s">&quot;下载失败时替换的文本&quot;</span> <span class="na">title=</span><span class="s">&quot;鼠标滑过时显示的文本，图片可见时有效&quot;</span><span class="nt">&gt;&lt;/img&gt;</span>
+
+<span class="c">&lt;!--表单 把用户输入的数据传送到服务器--&gt;</span>
+<span class="c">&lt;!--注：所有表单控件（文本框、文本域、按钮、单选框、复选框等）都必须放在 &lt;form&gt;&lt;/form&gt; --&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;传送方式&quot;</span> <span class="na">action=</span><span class="s">&quot;服务器的文件&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;/form&gt;</span>
+<span class="c">&lt;!--form 使用示例--&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;save.php&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;username&quot;</span><span class="nt">&gt;</span>用户名:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span>  <span class="na">name=</span><span class="s">&quot;username&quot;</span> <span class="na">id=</span><span class="s">&quot;username&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;&lt;br&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;pass&quot;</span><span class="nt">&gt;</span>密码:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span>  <span class="na">name=</span><span class="s">&quot;pass&quot;</span> <span class="na">id=</span><span class="s">&quot;pass&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;&lt;br&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;确定&quot;</span>  <span class="na">name=</span><span class="s">&quot;submit&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;reset&quot;</span> <span class="na">value=</span><span class="s">&quot;重置&quot;</span> <span class="na">name=</span><span class="s">&quot;reset&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="c">&lt;!--文本输入框--&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text/password&quot;</span> <span class="na">name=</span><span class="s">&quot;为文本框命名，以备后台程序ASP 、PHP使用&quot;</span> <span class="na">value=</span><span class="s">&quot;文本框的默认值&quot;</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!--文本框-多行输入--&gt;</span>
+<span class="nt">&lt;textarea</span> <span class="na">cols=</span><span class="s">&quot;50&quot;</span> <span class="na">rows=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+
+<span class="c">&lt;!--单选框 默认样式为原点--&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">value=</span><span class="s">&quot;提交到服务器的值&quot;</span> <span class="na">name=</span><span class="s">&quot;gender-man&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="c">&lt;!--复选框 默认样式为小框 打钩--&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">checked=</span><span class="s">&quot;设为checked时默认选中该项&quot;</span> <span class="na">value=</span><span class="s">&quot;提交到服务器的值&quot;</span> <span class="na">name=</span><span class="s">&quot;gender-woman&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="c">&lt;!--下拉列表框--&gt;</span>
+<span class="c">&lt;!--设置multipe时为下拉多选框--&gt;</span>
+<span class="nt">&lt;select</span> <span class="na">multiple=</span><span class="s">&quot;multiple&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!--列表选项--&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;看书&quot;</span><span class="nt">&gt;</span>看书<span class="nt">&lt;/option&gt;</span>
+    <span class="c">&lt;!--设为selected时默认选中--&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;旅游&quot;</span> <span class="na">selected =</span> <span class="s">&quot;selected&quot;</span><span class="nt">&gt;</span>旅游<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;运动&quot;</span><span class="nt">&gt;</span>运动<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;购物&quot;</span><span class="nt">&gt;</span>购物<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+
+<span class="c">&lt;!--提交按钮 提交表单信息到服务器--&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;按钮文本&quot;</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!--重置按钮 重置表单信息--&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;reset&quot;</span> <span class="na">value=</span><span class="s">&quot;重置&quot;</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!--表单中的label标签--&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;点击标签响应的控件id&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+
+
+<ul>
+<li>元素分类</li>
+</ul>
+<div class="hlcode"><pre><span class="nx">常用的块状元素有</span><span class="err">：</span>
+
+<span class="o">&lt;</span><span class="nb">div</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">...</span><span class="o">&lt;</span><span class="nx">h6</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">ol</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">dl</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nb">table</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">address</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">blockquote</span><span class="o">&gt;</span> <span class="err">、</span><span class="o">&lt;</span><span class="nb">form</span><span class="o">&gt;</span>
+
+<span class="nx">常用的内联元素有</span><span class="err">：</span>
+
+<span class="o">&lt;</span><span class="nx">a</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">br</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">i</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">em</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nb">label</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">q</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="kd">var</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nx">cite</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nb">code</span><span class="o">&gt;</span>
+
+<span class="nx">常用的内联块状元素有</span><span class="err">：</span>
+
+<span class="o">&lt;</span><span class="nb">img</span><span class="o">&gt;</span><span class="err">、</span><span class="o">&lt;</span><span class="nb">input</span><span class="o">&gt;</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-06-01 16:19:09</p>
+        </div>
+    </body>
+</html>
