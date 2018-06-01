@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>Mac切换Python版本 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#Python">Python</a> » Mac切换Python版本
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <h1 id="macpython">Mac切换Python版本</h1>
+<ol>
+<li>查看本机python目录</li>
+</ol>
+<div class="hlcode"><pre><span class="n">which</span> <span class="n">python3</span><span class="mf">.6</span>
+<span class="c1">// ／usr/local/bin/python3.6</span>
+</pre></div>
+
+
+<ol>
+<li>修改bashrc配置文件</li>
+</ol>
+<div class="hlcode"><pre><span class="n">vi</span> <span class="o">~/</span><span class="p">.</span><span class="n">bashrc</span>
+</pre></div>
+
+
+<ol>
+<li>想要为某个特定用户修改 Python 版本，只需要在其 home 目录下创建一个 alias(别名) 即可。打开该用户的 ~/.bashrc 文件，添加新的别名信息来修改默认使用的 Python 版本。</li>
+</ol>
+<div class="hlcode"><pre><span class="n">alias</span> <span class="n">python</span><span class="o">=</span><span class="err">&#39;</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="err">&#39;</span>
+</pre></div>
+
+
+<ol>
+<li>验证</li>
+</ol>
+<div class="hlcode"><pre><span class="n">python</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-06-01 16:18:42</p>
+        </div>
+    </body>
+</html>
