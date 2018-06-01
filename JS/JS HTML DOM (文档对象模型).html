@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>DOM(文档对象模型) - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#JS">JS</a> » DOM(文档对象模型)
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#dom">DOM简介</a></li>
+<li><a href="#dom-html">DOM HTML</a><ul>
+<li><a href="#html">获得HTML属性的三种方式</a></li>
+<li><a href="#html_1">改变HTML输出流</a></li>
+<li><a href="#html_2">改变HTML内容</a></li>
+<li><a href="#html_3">改变HTML属性</a></li>
+<li><a href="#html_4">改变HTML样式</a></li>
+</ul>
+</li>
+<li><a href="#html_5">HTML事件</a><ul>
+<li><a href="#html_6">HTML事件类型</a></li>
+<li><a href="#html_7">HTML事件属性</a></li>
+<li><a href="#html-dom">使用HTML DOM来分配事件</a><ul>
+<li><a href="#onloadonunload">onload和onunload事件</a></li>
+<li><a href="#onchange">onchange事件</a></li>
+<li><a href="#_1">向原元素添加事件句柄</a></li>
+<li><a href="#_2">向同一元素添加多个事件句柄</a></li>
+<li><a href="#window">向window对象添加事件句柄</a></li>
+<li><a href="#_3">传递参数</a></li>
+<li><a href="#_4">事件的冒泡传递和捕获传递</a></li>
+<li><a href="#removeeventlistener">removeEventListener()方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="dom">DOM简介</h2>
+<ul>
+<li>
+<p>当网页加载时，浏览器会创建页面的文档对象模型（DOM）。通过DOM，JS可以对HTML实现以下操作：</p>
+<blockquote>
+<ol>
+<li>改变页面中的所有HTML元素。</li>
+<li>改变页面中的所有HTML属性。</li>
+<li>改变页面中的所有CSS样式。</li>
+<li>对页面中的所有事件作出反应。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="dom-html">DOM HTML</h2>
+<h3 id="html">获得HTML属性的三种方式</h3>
+<ul>
+<li>
+<p>通过id查找HTML元素</p>
+<p><code>&lt;script&gt;
+x=document.getElementById("intro");
+document.write("&lt;p&gt;文本来自 id 为 intro 段落: "    + x.innerHTML + "&lt;/p&gt;");
+&lt;/script&gt;</code></p>
+</li>
+<li>
+<p>通过标签名找到元素</p>
+<p><code>&lt;script&gt;
+//查找id为main的元素
+var x=document.getElementById("main");
+//查找该元素中所有&lt;p&gt;元素，返回的为一个数组
+var y=x.getElementsByTagName("p");
+document.write('id="main"元素中的第一个段落为：' + y[0].innerHTML);
+&lt;/script&gt;</code></p>
+</li>
+<li>
+<p>通过类名查找元素</p>
+<p><code>&lt;script&gt;
+x=document.getElementsByClassName("intro");
+document.write("&lt;p&gt;文本来自 class 为 intro 段落: " + x[0].innerHTML + "&lt;/p&gt;");
+&lt;/script&gt;</code></p>
+</li>
+</ul>
+<h3 id="html_1">改变HTML输出流</h3>
+<ul>
+<li>js能够创建动态的HTML内容，比如动态获取当前时间等</li>
+<li>
+<p>使用document.write()可用于直接向HTML输出流写内容</p>
+<p><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;script&gt;
+document.write(Date());
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></p>
+</li>
+</ul>
+<h3 id="html_2">改变HTML内容</h3>
+<ul>
+<li>修改HTML内容最简单的方法是使用innerHTML属性</li>
+</ul>
+<div class="hlcode"><pre><span class="nt">&lt;script&gt;</span>
+document.getElementById(&quot;p1&quot;).innerHTML=&quot;新文本!&quot;;
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+
+<h3 id="html_3">改变HTML属性</h3>
+<ul>
+<li>
+<p>改变HTML属性可以套用以下模板</p>
+<p><code>document.getElementById(id).attribute=新属性值</code></p>
+</li>
+<li>
+<p>使用实例如下</p>
+<p><code>&lt;script&gt;
+//改变img的src属性
+document.getElementById("image").src="landscape.jpg";
+&lt;/script&gt;</code></p>
+</li>
+</ul>
+<h3 id="html_4">改变HTML样式</h3>
+<ul>
+<li>
+<p>改变HTML样式可以使用以下语法</p>
+<p><code>document.getElementById(id).style.property=新样式</code></p>
+</li>
+<li>
+<p>使用实例</p>
+<p><code>&lt;script&gt;
+document.getElementById("p2").style.color="blue";
+document.getElementById("p2").style.fontFamily="Arial";
+document.getElementById("p2").style.fontSize="larger";
+&lt;/script&gt;</code></p>
+</li>
+</ul>
+<h2 id="html_5">HTML事件</h2>
+<h3 id="html_6">HTML事件类型</h3>
+<ul>
+<li>HTML有诸如以下几种事件类型</li>
+</ul>
+<blockquote>
+<ol>
+<li>当用户点击鼠标时</li>
+<li>当网页已加载时</li>
+<li>当图像已加载时</li>
+<li>当鼠标移动到元素上时</li>
+<li>当输入字段被改变时</li>
+<li>当提交HTML表单时</li>
+<li>当用户触发按键时</li>
+<li>...</li>
+<li>..</li>
+</ol>
+</blockquote>
+<h3 id="html_7">HTML事件属性</h3>
+<ul>
+<li>
+<p>如需监听HTML元素的事件，可以使用事件属性进行分配</p>
+<p><code>//监听button元素的onClick事件
+&lt;button onclick="displayDate()"&gt;点这里&lt;/button&gt;</code></p>
+</li>
+</ul>
+<h3 id="html-dom">使用HTML DOM来分配事件</h3>
+<ul>
+<li>
+<p>HTML DOM允许使用js来向HTML元素分配事件</p>
+<p><code>&lt;script&gt;
+//向button元素分配onClick事件
+//并将displayDate函数分配给id=“myBtn”的HTML元素
+document.getElementById("myBtn").onclick=function(){displayDate()};
+&lt;/script&gt;</code></p>
+</li>
+</ul>
+<h4 id="onloadonunload">onload和onunload事件</h4>
+<ul>
+<li>
+<p>onload和onunload会在用户进入或离开页面时被触发，可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。也可用于处理cookie</p>
+<p><code>//
+&lt;body onload="checkCookies()"&gt;</code></p>
+</li>
+</ul>
+<h4 id="onchange">onchange事件</h4>
+<ul>
+<li>
+<p>onchange事件常结合对输入字段的验证来使用</p>
+<p>```<br />
+//当用户改变输入字段的内容时，调用upperCase()函数<br />
+<input type="text" id="fname" onchange="upperCase()"></p>
+</li>
+</ul>
+<div class="hlcode"><pre><span class="err">###</span><span class="vi">#onmouseover和onmouseout事件</span>
+
+<span class="o">-</span> <span class="nx">onmouseover和onmouseout事件可用于在用户的鼠标移至HTML元素上方或移出元素时出发函数</span>
+
+    <span class="sb">```</span>
+<span class="sb">&lt;div onmouseover=&quot;mOver(this)&quot; onmouseout=&quot;mOut(this)&quot; style=&quot;background-color:#D94A38;width:120px;height:20px;padding:40px;&quot;&gt;Mouse Over Me&lt;/div&gt;</span>
+<span class="sb">&lt;script&gt;</span>
+<span class="sb">function mOver(obj){</span>
+<span class="sb">    obj.innerHTML=&quot;Thank You&quot;</span>
+<span class="sb">}</span>
+<span class="sb">function mOut(obj){</span>
+<span class="sb">    obj.innerHTML=&quot;Mouse Over Me&quot;</span>
+<span class="sb">}</span>
+<span class="sb">&lt;/script&gt;</span>
+<span class="sb">    ```</span>
+
+<span class="err">###</span><span class="vi">#onmouseDown</span><span class="err">、</span><span class="nb">onmouseup</span><span class="err">、</span><span class="nx">以及onclick事件</span>
+
+<span class="o">-</span> <span class="nx">这三个事件构成了鼠标点击事件的所有部分</span><span class="err">、</span><span class="nx">当点击鼠标按钮时</span><span class="err">，</span><span class="nx">会出发onmousedown事件</span><span class="err">，</span><span class="nx">当释放鼠标时会触发onmouseup事件</span><span class="err">，</span><span class="nx">最后</span><span class="err">，</span><span class="nx">当完成鼠标点击时</span><span class="err">，</span><span class="nx">会触发onclick事件</span><span class="err">。</span>
+
+<span class="err">#</span><span class="vi">#DOM</span> <span class="nx">EventListener</span>
+
+<span class="err">##</span><span class="vi">#addEventListener</span><span class="p">()</span><span class="nx">方法</span>
+
+<span class="err">####</span> <span class="nx">用处</span>
+    <span class="mi">1</span><span class="nx">.</span> <span class="nx">用于向元素添加事件监听</span>
+    <span class="mi">2</span><span class="nx">.</span> <span class="nx">一个元素可以添加多个监听事件</span>
+    <span class="mi">3</span><span class="nx">.</span> <span class="nx">可以向同个元素添加多个同类型的监听事件</span><span class="err">，</span><span class="nx">比如</span><span class="err">：</span><span class="nx">两个onclick事件</span><span class="err">。</span>
+    <span class="mi">4</span><span class="nx">.</span> <span class="nx">可以向任何DOM对象添加事件监听</span><span class="err">，</span><span class="nx">不仅仅是HTML元素</span><span class="err">，</span><span class="nx">比如</span><span class="err">：</span><span class="nx">window对象</span><span class="err">。</span>
+    <span class="mi">5</span><span class="nx">.</span> <span class="nx">可以更简单的控制事件</span><span class="err">（</span><span class="nx">冒泡与捕获</span><span class="err">）</span>
+    <span class="mi">6</span><span class="nx">.</span> <span class="nx">使用addEventListener</span><span class="p">()</span><span class="nx">方法时</span><span class="err">，</span><span class="nx">javascript从HTML标记中分离开来</span><span class="err">，</span><span class="nx">可读性更强</span><span class="err">，</span><span class="nx">在没有控制HTML标记时也可以添加事件监听</span><span class="err">。</span>
+    <span class="mi">7</span><span class="nx">.</span> <span class="nx">可以使用removeEventListener</span><span class="p">()</span><span class="nx">方法来移除事件的监听</span><span class="err">。</span>
+
+<span class="err">####</span> <span class="nx">语法</span>
+</pre></div>
+
+
+<div class="hlcode"><pre><span class="c1">//第一个参数是事件类型（如click或mousedown）</span>
+<span class="c1">//第二个参数是事件触发后调用的函数</span>
+<span class="c1">//第三个参数是布尔值，用于描述事件是冒泡还是捕获。该参数是可选的，默认为false，冒泡传递</span>
+<span class="n">element</span><span class="p">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="k">event</span><span class="p">,</span> <span class="k">function</span><span class="p">,</span> <span class="n">useCapture</span><span class="p">);</span>
+</pre></div>
+
+
+<p>```</p>
+<ul>
+<li>
+<p>实例</p>
+<p><code>//当用户点击按钮时触发监听事件
+document.getElementById("myBtn").addEventListener("click", displayDate);</code></p>
+</li>
+</ul>
+<h4 id="_1">向原元素添加事件句柄</h4>
+<ul>
+<li>
+<p>实例1: 当用户点击元素时弹出“hello world”</p>
+<p><code>element.addEventListener("click", function(){ alert("Hello World!"); });</code></p>
+</li>
+<li>
+<p>实例2: 使用函数名，来引用外部函数</p>
+<p><code>//当用户点击元素时弹出helloworld
+element.addEventListener("click", myFunction);
+function myFunction() {
+alert ("Hello World!");
+}</code></p>
+</li>
+</ul>
+<h4 id="_2">向同一元素添加多个事件句柄</h4>
+<ul>
+<li>向同个元素添加多个同种类型事件,注： 不会覆盖已存在的事件</li>
+</ul>
+<p><code>element.addEventListener("click", myFunction);
+element.addEventListener("click", mySecondFunction);</code></p>
+<ul>
+<li>向同个元素添加多个不同类型事件</li>
+</ul>
+<p><code>element.addEventListener("mouseover", myFunction);
+element.addEventListener("click", mySecondFunction);
+element.addEventListener("mouseout", myThirdFunction);</code></p>
+<h4 id="window">向window对象添加事件句柄</h4>
+<ul>
+<li>addEventListener()方法允许向HTML DOM对象添加事件监听。HTML DOM对象如： HTML元素，HTML文档，window对象，或者其他支出的事件对象如： xmlHttpRequest对象。</li>
+</ul>
+<p><code>//当用户重置窗口大小时添加事件监听
+   window.addEventListener("resize", function(){
+    document.getElementById("demo").innerHTML = sometext;
+});</code></p>
+<h4 id="_3">传递参数</h4>
+<ul>
+<li>当传递参数时，使用“匿名函数”调用带参数的函数</li>
+</ul>
+<p><code>element.addEventListener("click", function(){ myFunction(p1, p2); });</code></p>
+<h4 id="_4">事件的冒泡传递和捕获传递</h4>
+<ul>
+<li>事件传递有两种方式： 冒泡或捕获，这两种事件传递定义了元素事件触发的顺序。</li>
+<li>比如： p元素插入到 div 元素中，用户点击 p 元素, 哪个元素的 "click" 事件先被触发呢？</li>
+<li>在<strong>冒泡传递中</strong>内部事件会先被触发，然后再触发外部元素。</li>
+<li>在<strong>捕获传递中</strong>外部元素事件会先被触发，然后才会触发内部元素的事件</li>
+</ul>
+<h4 id="removeeventlistener">removeEventListener()方法</h4>
+<ul>
+<li>removeEventListener()方法移除由addEventListener()方法添加事件的句柄。</li>
+</ul>
+<p><code>element.removeEventListener("mousemove", myFunction);</code></p>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-06-01 16:14:23</p>
+        </div>
+    </body>
+</html>
