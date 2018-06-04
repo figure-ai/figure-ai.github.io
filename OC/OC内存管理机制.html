@@ -59,6 +59,13 @@
 
 
 <ul>
+<li>为什么要对堆区的内存空间进行管理，基本数据类型不需要管理呢？</li>
+</ul>
+<div class="hlcode"><pre><span class="err">因为基本数据类型的数据会被放入栈中，他们依次紧密排列，遵循先进后出的原则，系统会自动进行管理。</span> <span class="err">而对象类型会被放到堆中，堆中的内存是不连续的，无法自动释放，所以需要我们管理。</span>
+</pre></div>
+
+
+<ul>
 <li>早期的内存管理开发人员需要使用<strong>alloc</strong>(alloc会使得对象的引用计数初始化为1)、<strong>retain</strong>、<strong>release</strong>、控制对象的引用计数</li>
 </ul>
 <div class="hlcode"><pre><span class="c1">//申请内存，并调用初始化，返回指针</span>
@@ -193,7 +200,7 @@
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-06-04 15:19:51</p>
+                <p>Last Update 2018-06-04 17:15:51</p>
         </div>
     </body>
 </html>
