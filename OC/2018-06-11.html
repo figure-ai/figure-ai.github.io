@@ -5,7 +5,7 @@
         <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-        <title>webstorm配置bootstrap代码提示 - </title>
+        <title>Effective-OC笔记 - </title>
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,13 +33,30 @@
         <div id="post-nav">
             <div id="toggle-button">宽版</div>
             
-            <a href="/">Home</a> » <a href="/#前端">前端</a> » webstorm配置bootstrap代码提示
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » Effective-OC笔记
             
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <p><a href="https://blog.csdn.net/arex_efan/article/details/45363829">webstorm配置bootstrap代码提示</a></p>
+        <ul>
+<li>尽量减少引入头文件，多使用@class向前声明类</li>
+</ul>
+<div class="hlcode"><pre>
+</pre></div>
+
+
+<ul>
+<li>多用字面量语法，字面量语法创建的为不可变对象</li>
+<li>多用类型常量，少用#define预处理命令</li>
+<li>用枚举表示状态、选项、状态码</li>
+</ul>
+<div class="hlcode"><pre><span class="k">enum</span> <span class="n">EOCConnectState</span> <span class="p">{</span>
+    <span class="n">EOCEnumConnect</span><span class="p">,</span>
+    <span class="n">EOCEnumDisconnect</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">type</span> <span class="n">of</span> <span class="k">enum</span> <span class="n">EOCConnectState</span> <span class="o">=</span> <span class="n">EOCConnectState</span><span class="p">;</span>
+</pre></div>
     </div>
 
         </div>

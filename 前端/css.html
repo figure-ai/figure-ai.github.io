@@ -56,6 +56,9 @@
 <li><a href="#_5">垂直居中</a></li>
 <li><a href="#_6">其他</a><ul>
 <li><a href="#_7">子控件从左到右布局</a></li>
+<li><a href="#position">position属性</a></li>
+<li><a href="#display">display属性</a></li>
+<li><a href="#float_1">float属性</a></li>
 </ul>
 </li>
 </ul>
@@ -440,6 +443,149 @@
 <li>table</li>
 </ul>
 <p><img alt="" src="media/15264606620791.jpg" /></p>
+<h2 id="position">position属性</h2>
+<blockquote>
+<p>参考：<a href="https://segmentfault.com/a/1190000011358507">css布局说</a></p>
+</blockquote>
+<ul>
+<li>
+<p><code>static</code>（默认）：元素框正常生成。<strong>块级元素</strong>生成一个矩形框，作为文档流的一部分；<strong>行内元素</strong>则会创建一个或多个行框，置于其父元素。</p>
+</li>
+<li>
+<p><code>relative</code>：元素框相对于<strong>之前正常的文档流</strong>发生位置偏移，并且原先的位置仍然被占据。发生偏移时可能会覆盖其他元素。</p>
+</li>
+<li>
+<p><code>absolute</code>：元素框<strong>不再占有</strong>文档流的位置，并且相对于包含块进行偏移(所谓的包含块就是<strong>最近一级外层元素position不为static的元素</strong>)</p>
+</li>
+<li>
+<p><code>fixed</code>：元素框<strong>不再占有</strong>文档流的位置，并且<strong>相对于视窗进行定位</strong></p>
+</li>
+<li>
+<p><code>sticky</code>：相当于relative和fixed混合。<strong>最初会被当作是relative</strong>，相对于原来的位置进行偏移；一旦<strong>超过一定阈值之后，会被当成fixed定位，相对于视口进行定位</strong></p>
+</li>
+</ul>
+<h2 id="display">display属性</h2>
+<blockquote>
+<p>参考：<a href="https://segmentfault.com/a/1190000009636727">display属性详解</a></p>
+</blockquote>
+<ul>
+<li>
+<p><code>none</code>：将元素设置为none的时候既<strong>不会占据空间，也无法显示，相当于该元素不存在</strong>。</p>
+</li>
+<li>
+<p><code>inline</code>：将元素设置成<strong>行内元素</strong>，设置了该属性之后<strong>设置高度、宽度都无效，同时text-align属性设置也无效，但是设置了line-height会让inline元素居中</strong></p>
+</li>
+<li>
+<p><code>block</code>：设置元素为块状元素，<strong>如果不指定宽高，默认会继承父元素的宽度，并且独占一行</strong>，即使宽度有剩余也会独占一行，<strong>高度一般以子元素撑开的高度为准</strong>，当然也可以自己设置宽度和高度。</p>
+</li>
+<li>
+<p><code>list-item</code>：此属性默认会<strong>把元素作为列表显示</strong>，要完全模仿列表的话还需要加上 list-style-position，list-style-type</p>
+</li>
+<li>
+<p><code>inline-block</code>：既<strong>具有block的宽高特性又具有inline的同行元素特性</strong>。 通过inline-block结合text-align: justify 还可以实现固定宽高的列表两端对齐布局</p>
+</li>
+<li>
+<p><code>table</code>：此元素会作为块级表格来显示（类似table），表格前后带有换行符。</p>
+</li>
+</ul>
+<div class="hlcode"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;tr tr1&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;td&quot;</span><span class="nt">&gt;</span>head1<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;td&quot;</span><span class="nt">&gt;</span>head2<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;td&quot;</span><span class="nt">&gt;</span>head3<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;tr tr2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;td&quot;</span><span class="nt">&gt;</span>123<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;td&quot;</span><span class="nt">&gt;</span>123<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;td&quot;</span><span class="nt">&gt;</span>123<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;style&gt;</span>
+.main{
+  display: table;
+  width:100%;
+  border-collapse: collapse;/*为表格设置合并边框模型：*/
+}
+.tr{
+  display: table-row;
+  border-color: inherit;
+}
+.tr1 .td{
+  height:50px;
+  vertical-align: middle;
+}
+.td{
+  display: table-cell;
+  border: 1px solid;
+}
+.td:nth-of-type(1){
+  width: 100px;
+}
+.td:nth-of-type(3){
+  width: 100px;
+}
+<span class="nt">&lt;/style&gt;</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p><code>flex</code>：弹性布局属性，<strong>设为flex布局以后，子元素的float、clear和vertical-align属性将失效。</strong>主要属性有两大类：容器属性和项目的属性</p>
+<ul>
+<li>
+<p><strong>容器属性：</strong></p>
+<ul>
+<li>
+<p><code>flex-direction</code>： 决定主轴的方向（即项目的排列方向）。</p>
+</li>
+<li>
+<p><code>flex-wrap</code>： 默认情况下，元素都排在一条线（又称”轴线”）上，flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+</li>
+<li>
+<p><code>flex-flow</code>：属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</p>
+</li>
+<li>
+<p><code>justify-content</code>：定义了项目在主轴上的对齐方式。</p>
+</li>
+<li>
+<p><code>align-items</code>：定义项目在交叉轴上如何对齐。</p>
+</li>
+<li>
+<p><code>align-content</code>：定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>项目属性：</strong></p>
+<ul>
+<li>
+<p><code>order</code>：定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
+</li>
+<li>
+<p><code>flex-grow</code>：定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+</li>
+<li>
+<p><code>flex-shrink</code>：属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+</li>
+<li>
+<p><code>flex-basis</code>：属性定义了在分配多余空间之前，项目占据的主轴空间（mainsize）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
+</li>
+<li>
+<p><code>flex</code>：属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
+</li>
+<li>
+<p><code>align-self</code>：属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="float_1">float属性</h2>
+<blockquote>
+<p><a href="https://blog.csdn.net/helllochun/article/details/51615136">float属性详解</a></p>
+</blockquote>
     </div>
 
         </div>
@@ -449,7 +595,7 @@
                 Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
                 Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
               </p>
-                <p>Last Update 2018-06-04 17:15:51</p>
+                <p>Last Update 2018-06-13 14:47:41</p>
         </div>
     </body>
 </html>
