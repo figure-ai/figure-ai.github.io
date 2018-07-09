@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>js常用 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#JS">JS</a> » js常用
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">向上取整</a></li>
+<li><a href="#_2">获取当前时间戳</a></li>
+<li><a href="#_3">规范两位字符串格式</a></li>
+</ul>
+</div>
+<h1 id="_1">向上取整</h1>
+<div class="hlcode"><pre><span class="n">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">1.11</span>
+<span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+
+
+<h1 id="_2">获取当前时间戳</h1>
+<div class="hlcode"><pre><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">Date</span><span class="p">.</span><span class="n">now</span><span class="p">())</span>
+<span class="c1">// 1530609572397</span>
+</pre></div>
+
+
+<h1 id="_3">规范两位字符串格式</h1>
+<div class="hlcode"><pre><span class="n">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="c1">// let a = 28</span>
+<span class="c1">// slice函数如果传的值为负数，则从倒数截取</span>
+<span class="n">let</span> <span class="n">b</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="n">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-07-09 10:20:46</p>
+        </div>
+    </body>
+</html>

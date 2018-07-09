@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>正则表达式的使用 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#JS">JS</a> » 正则表达式的使用
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <ul>
+<li>参考：<a href="http://tool.oschina.net/uploads/apidocs/jquery/regexp.html">正则表达式手册</a></li>
+<li>参考：<a href="http://blog.didispace.com/regular-expression-7/">正则表达式</a></li>
+<li>参考：<a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832260566c26442c671fa489ebc6fe85badda25cd000">廖雪峰正则表达式</a></li>
+</ul>
+<div class="hlcode"><pre><span class="err">\</span><span class="n">S</span>      <span class="o">:</span> <span class="err">匹配任意非空字符，等价于</span><span class="p">[</span><span class="o">^</span> <span class="err">\</span><span class="n">f</span><span class="err">\</span><span class="n">n</span><span class="err">\</span><span class="n">r</span><span class="err">\</span><span class="n">t</span><span class="err">\</span><span class="n">v</span><span class="p">]</span>
+<span class="p">.</span>       <span class="o">:</span> <span class="err">匹配除\</span><span class="n">n</span><span class="err">之外的任何字符</span>
+<span class="err">\</span><span class="n">D</span>      <span class="o">:</span> <span class="err">匹配一个非数字字符，等价于</span><span class="p">[</span><span class="o">^</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>
+<span class="err">\</span><span class="n">d</span>      <span class="o">:</span> <span class="err">匹配一个数字字符，等价于</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>   <span class="o">:</span> <span class="err">匹配一个数字字符</span>
+<span class="o">^</span>       <span class="o">:</span> <span class="err">匹配字符串开始的位置</span><span class="p">,</span><span class="err">例如</span><span class="o">^</span><span class="n">a</span><span class="err">必须以</span><span class="n">a</span><span class="err">开头</span>
+<span class="err">$</span>       <span class="o">:</span> <span class="err">匹配字符串结束的位置</span><span class="p">,</span><span class="err">例如</span><span class="n">b</span><span class="err">$必须以</span><span class="n">b</span><span class="err">结束</span>
+<span class="err">\</span><span class="n">w</span>      <span class="o">:</span> <span class="err">匹配包括下划线的任何单词字符或数字，等价于“</span><span class="p">[</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="n">_</span><span class="p">]</span><span class="err">”。</span>
+<span class="p">{}</span>      <span class="o">:</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>  <span class="err">最低匹配</span><span class="mi">3</span><span class="err">次最高匹配</span><span class="mi">6</span><span class="err">次</span>
+<span class="p">()</span>      <span class="o">:</span> <span class="err">优先匹配括号中的内容</span>
+<span class="o">+</span>       <span class="o">:</span>  <span class="err">至少匹配一次，等价于</span><span class="p">{</span><span class="mi">1</span><span class="p">,}</span>
+</pre></div>
+
+
+<div class="hlcode"><pre><span class="c1">// 验证手机号码正则</span>
+<span class="c1">// let reg = /^1([3-8])(\d{9})$/</span>
+<span class="c1">// let test = &#39;13160694978&#39;</span>
+<span class="c1">// let a = reg.exec(test)</span>
+<span class="c1">// console.log(a)</span>
+
+<span class="c1">// 验证邮箱的正则</span>
+<span class="c1">// let reg = /^((\S|_|-){2,10})@(\S{2,6})(.com)$/</span>
+<span class="c1">// let test = &#39;some_one@gmail.com&#39;</span>
+<span class="c1">// let a = reg.exec(test)</span>
+<span class="c1">// console.log(a)</span>
+
+<span class="c1">// 匹配任意重复字符</span>
+<span class="c1">// var s = &#39;aaabccc11fdsaa&#39;;</span>
+<span class="c1">// var reg = /(.)\1+/g;</span>
+<span class="c1">// console.log(s.match(reg)); //[&quot;aaa&quot;, &quot;ccc&quot;, &quot;11&quot;]</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-07-09 10:20:46</p>
+        </div>
+    </body>
+</html>
