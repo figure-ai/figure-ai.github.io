@@ -5,7 +5,7 @@
         <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-        <title>RN通信机制 - </title>
+        <title>OC-底层原理 - </title>
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,24 +33,52 @@
         <div id="post-nav">
             <div id="toggle-button">宽版</div>
             
-            <a href="/">Home</a> » <a href="/#ReactNative">ReactNative</a> » RN通信机制
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » OC-底层原理
             
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <ul>
-<li>js调用OC代码</li>
+        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">对象的本质</a><ul>
+<li><a href="#_2">对象的分类</a></li>
 </ul>
-<div class="hlcode"><pre><span class="n">js</span><span class="err">调用</span><span class="n">OC</span><span class="err">函数</span> <span class="o">=</span><span class="err">》将函数转化为</span><span class="n">ModuleID</span><span class="o">/</span><span class="n">MethondID</span> <span class="o">=</span><span class="err">》</span><span class="n">OC</span><span class="err">根据</span><span class="n">ID</span><span class="err">拿到方法</span> <span class="o">=</span><span class="err">》处理参数（参数类型转换）</span><span class="o">=</span><span class="err">》调用</span><span class="n">OC</span><span class="err">方法</span> <span class="o">=</span><span class="err">》回调</span><span class="n">CallBackID</span> <span class="o">=</span><span class="err">》</span><span class="n">JS</span><span class="err">通过</span><span class="n">CallbackID</span><span class="err">拿到</span><span class="n">callback</span><span class="err">执行</span>
-</pre></div>
-
-
-<ul>
-<li>参考资料<br />
-<a href="http://blog.cnbang.net/tech/2698/">React Native通信机制详解</a><br />
-<a href="http://awhisper.github.io/2016/06/24/ReactNative%E6%B5%81%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">ReactNative iOS源码解析（一）</a></li>
+</li>
+<li><a href="#kvo">kvo</a></li>
 </ul>
+</div>
+<h1 id="_1">对象的本质</h1>
+<blockquote>
+<p>对象的本质是c语言的结构体</p>
+</blockquote>
+<h2 id="_2">对象的分类</h2>
+<blockquote>
+<p>对象分为实例对象，类对象，元类（meta-class）三种：实例对象保存对象的属性值等信息，类对象存放对象的方法、属性信息（属性的类型、是否可读写等），元类对象保存类方法。</p>
+</blockquote>
+<ol>
+<li>
+<p>实例对象</p>
+<blockquote>
+<p>实例对象存放有isa指针以及对象的属性值。</p>
+</blockquote>
+</li>
+<li>
+<p>类对象</p>
+<blockquote>
+<p>类对象存放有isa指针以及superclass指针以及实例方法和属性信息等，superclass指针指向父类的类对象，isa指针指向元类对象。</p>
+</blockquote>
+</li>
+<li>
+<p>元类对象（meta-class）</p>
+<blockquote>
+<p>元类对象存有superclass指针已类方法，superclass指向父类的元类对象。</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="kvo">kvo</h1>
+<ol>
+<li>meta-class 有isa属性吗   没有 isa属性是指向上一级的指针，meta-class是一个对象最底层的基类，故没有isa属性</li>
+</ol>
     </div>
 
         </div>
