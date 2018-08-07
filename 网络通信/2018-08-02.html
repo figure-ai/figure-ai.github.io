@@ -5,7 +5,7 @@
         <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
         <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
-        <title>OC-底层原理 - </title>
+        <title>TCP/IP协议 - </title>
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,52 +33,25 @@
         <div id="post-nav">
             <div id="toggle-button">宽版</div>
             
-            <a href="/">Home</a> » <a href="/#OC">OC</a> » OC-底层原理
+            <a href="/">Home</a> » <a href="/#网络通信">网络通信</a> » TCP/IP协议
             
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="content">
-        <div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#_1">对象的本质</a><ul>
-<li><a href="#_2">对象的分类</a></li>
+        <ul>
+<li>分层</li>
 </ul>
-</li>
-<li><a href="#kvo">kvo</a></li>
+<div class="hlcode"><pre><span class="err">应用层：负责封装传输的数据</span>
+<span class="err">传输层：实现端到端的数据传输</span>
+<span class="err">网络层：负责寻址和路由选择、连接的建立、保持和终止等，向传输层提供最基本的端到端的数据传送服务。</span>
+<span class="err">链路层：负责提供物理层的支持</span>
+</pre></div>
+
+
+<ul>
+<li>网络层如何寻址</li>
 </ul>
-</div>
-<h1 id="_1">对象的本质</h1>
-<blockquote>
-<p>对象的本质是c语言的结构体</p>
-</blockquote>
-<h2 id="_2">对象的分类</h2>
-<blockquote>
-<p>对象分为实例对象，类对象，元类（meta-class）三种：实例对象保存对象的属性值等信息，类对象存放对象的方法、属性信息（属性的类型、是否可读写等），元类对象保存类方法。</p>
-</blockquote>
-<ol>
-<li>
-<p>实例对象</p>
-<blockquote>
-<p>实例对象存放有isa指针以及对象的属性值。</p>
-</blockquote>
-</li>
-<li>
-<p>类对象</p>
-<blockquote>
-<p>类对象存放有isa指针以及superclass指针以及实例方法和属性信息等，superclass指针指向父类的类对象，isa指针指向元类对象。</p>
-</blockquote>
-</li>
-<li>
-<p>元类对象（meta-class）</p>
-<blockquote>
-<p>元类对象存有superclass指针已类方法，superclass指向父类的元类对象。</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="kvo">kvo</h1>
-<ol>
-<li>meta-class 有isa属性吗   没有 isa属性是指向上一级的指针，meta-class是一个对象最底层的基类，故没有isa属性</li>
-</ol>
     </div>
 
         </div>
