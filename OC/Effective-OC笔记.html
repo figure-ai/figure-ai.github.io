@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>Effective-OC笔记 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » Effective-OC笔记
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <ul>
+<li>尽量减少引入头文件，多使用@class向前声明类</li>
+</ul>
+<div class="hlcode"><pre><span class="err">比如在</span><span class="n">person</span><span class="p">.</span><span class="n">h</span><span class="err">文件中导入</span><span class="n">book</span><span class="p">.</span><span class="n">h</span><span class="err">，那么所有导入</span><span class="n">person</span><span class="p">.</span><span class="n">h</span><span class="err">的文件默认导入</span><span class="n">book</span><span class="p">.</span><span class="n">h</span><span class="err">不管有没有用到，这势必会增加编译时长。</span>
+</pre></div>
+
+
+<ul>
+<li>多用字面量语法，字面量语法创建的<strong>为不可变对象</strong></li>
+</ul>
+<div class="hlcode"><pre><span class="c1">// 字面量语法</span>
+<span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dict</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;hight&quot;</span><span class="o">:</span> <span class="err">@</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="s">@&quot;name&quot;</span><span class="o">:</span> <span class="s">@&quot;lyly&quot;</span><span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>多用类型常量，少用#define预处理命令</li>
+</ul>
+<div class="hlcode"><pre><span class="c1">// 类型常量，staic声明变量只在此文件可见，const声明变量不可修改</span>
+<span class="n">staic</span> <span class="k">const</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">kCellId</span> <span class="o">=</span> <span class="s">@&quot;cellID&quot;</span>
+
+<span class="c1">// #define预处理命令，使用预处理命令会将代码中的CELL_ID替换成cellID，但是没有类型信息。</span>
+<span class="c1">// 且适用于所有文件</span>
+<span class="cp">#define CELL_ID cellID</span>
+</pre></div>
+
+
+<ul>
+<li>用枚举表示状态、选项、状态码</li>
+</ul>
+<div class="hlcode"><pre><span class="k">enum</span> <span class="n">EOCConnectState</span> <span class="p">{</span>
+    <span class="n">EOCEnumConnect</span><span class="p">,</span>
+    <span class="n">EOCEnumDisconnect</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">type</span> <span class="n">of</span> <span class="k">enum</span> <span class="n">EOCConnectState</span> <span class="o">=</span> <span class="n">EOCConnectState</span><span class="p">;</span>
+
+<span class="c1">// 向前声明枚举类型</span>
+<span class="c1">// 这样写的好处是在用到变量时，编译器知道变量是什么类型，从而清楚要分配多少内存空间</span>
+<span class="k">enum</span> <span class="n">EOCConectState</span><span class="o">:</span> <span class="n">NSInteger</span> <span class="p">{</span>
+    <span class="n">EOCEnumConnect</span><span class="p">,</span>
+    <span class="n">EOCEnumDisconnect</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">type</span> <span class="n">of</span> <span class="k">enum</span> <span class="n">EOCConnectState</span> <span class="o">=</span> <span class="n">EOCConnectState</span><span class="p">;</span>
+
+<span class="c1">// 向前声明枚举类型写法2</span>
+<span class="c1">// 这样写会把EOCEnumConnect的值置为1，后面的状态会依次递增。</span>
+<span class="c1">// 比如EOCEnumConnected的值就为3</span>
+<span class="k">enum</span> <span class="n">EOCConectState</span> <span class="p">{</span>
+    <span class="n">EOCEnumConnect</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">EOCEnumDisconnect</span><span class="p">,</span>
+    <span class="n">EOCEnumConnected</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">type</span> <span class="n">of</span> <span class="k">enum</span> <span class="n">EOCConnectState</span> <span class="o">=</span> <span class="n">EOCConnectState</span><span class="p">;</span>
+
+<span class="c1">// 定义选项时使用“按位或操作符”组合枚举， 这样定义的好处是外部使用的时候可以选择多个选项</span>
+<span class="k">enum</span> <span class="n">UIViewAutoresizing</span> <span class="p">{</span>
+    <span class="n">UIViewAutoresizingnone</span>                  <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">UIViewAutoresizingFlexibleLeftMargin</span>    <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">UIViewAutoresizingFlexibleRightMargin</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">UIViewAutoresizingFlexibleTopMargin</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">UIViewAutoresizingFlexibleBottomMargin</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">UIViewAutoresizingFlexibleHeight</span>        <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">UIViewAutoresizingFlexibleWidth</span>         <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1">// NS_ENUM和NS_OPTIONS宏都是使用#define预处理指令来定义的定义</span>
+<span class="c1">// 使用NSEnum宏定义一个枚举</span>
+<span class="k">typedef</span> <span class="n">NS_ENUM</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">,</span> <span class="n">EOCConnectionState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">EOCConnectionStateDisconnected</span><span class="p">,</span>
+    <span class="n">EOCConnectionStateConnecting</span><span class="p">,</span>
+    <span class="n">EOCConnectionStateConnected</span>
+<span class="p">}</span>
+<span class="c1">// NSOption</span>
+<span class="k">typedef</span> <span class="n">NS_OPTIONS</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">,</span> <span class="n">EOCConnectionState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">EOCConnectionStateDisconnected</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">EOCConnectionStateConnecting</span>    <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">EOCConnectionStateConnected</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-09-03 13:35:41</p>
+        </div>
+    </body>
+</html>

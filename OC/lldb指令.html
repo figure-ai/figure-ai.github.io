@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/reset_typo.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <title>OC-底层原理 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script language="javascript" type="text/javascript">
+    var oddClick = true;
+    $(document).ready(function() {
+      $('#toggle-button').click(function() {
+        $('#container').animate({
+          width: oddClick? "100%":"60%",
+        });
+        $(this).text(oddClick? "窄版":"宽版");
+        oddClick = !oddClick;
+      });
+    });
+</script>
+
+    </head>
+
+    <body>
+        <div id="container" class="typo">
+            
+    <div id="header">
+        <div id="post-nav">
+            <div id="toggle-button">宽版</div>
+            
+            <a href="/">Home</a> » <a href="/#OC">OC</a> » OC-底层原理
+            
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="content">
+        <div class="hlcode"><pre><span class="n">apropos</span>  <span class="o">-</span> <span class="err">列出与单词或主题相关的调试器命令。</span> 
+<span class="n">breakpoint</span>  <span class="o">-</span> <span class="err">用于在断点上操作的命令（请参阅&#39;帮助</span><span class="n">b</span><span class="err">&#39;以获取简写。）</span>
+<span class="n">bugreport</span>  <span class="o">-</span> <span class="err">用于创建特定于域的错误报告的命令。</span> 
+<span class="n">command</span>  <span class="o">-</span> <span class="err">用于管理自定义</span><span class="n">LLDB</span><span class="err">命令的命令。</span> 
+<span class="n">disassemble</span>  <span class="o">-</span> <span class="err">反汇编当前目标中的指定指令。默认为当前线程和堆栈帧的当前函数。</span> 
+<span class="n">expression</span>  <span class="o">-</span> <span class="err">计算当前线程上的表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。</span> 
+<span class="n">frame</span>  <span class="o">-</span> <span class="err">用于选择和检查当前线程的堆栈帧的命令。</span> 
+<span class="n">gdb</span><span class="o">-</span><span class="n">remote</span>  <span class="o">-</span> <span class="err">通过远程</span><span class="n">GDB</span><span class="err">服务器连接到进程。如果未指定主机，则假定为</span><span class="n">localhost</span><span class="err">。</span> 
+<span class="n">gui</span>  <span class="o">-</span> <span class="err">切换到基于</span><span class="n">curses</span><span class="err">的</span><span class="n">GUI</span><span class="err">模式。</span> 
+<span class="n">help</span>  <span class="o">-</span> <span class="err">显示所有调试器命令的列表，或提供有关特定命令的详细信息。</span>
+<span class="n">kdp</span><span class="o">-</span><span class="n">remote</span>  <span class="o">-</span> <span class="err">通过远程</span><span class="n">KDP</span><span class="err">服务器连接到进程。如果未指定</span><span class="n">UDP</span><span class="err">端口，则假定端口为</span><span class="mi">41139</span><span class="err">。</span> 
+<span class="n">language</span>  <span class="o">-</span> <span class="err">特定于源语言的命令。</span> 
+<span class="n">log</span>  <span class="o">-</span> <span class="err">控制</span><span class="n">LLDB</span><span class="err">内部日志记录的命令。</span> 
+<span class="n">memory</span>  <span class="o">-</span> <span class="err">在当前目标进程中对内存进行操作的命令。</span> 
+<span class="n">platform</span>  <span class="o">-</span> <span class="err">管理和创建平台的命令。</span> 
+<span class="n">plugin</span>  <span class="o">-</span> <span class="err">管理</span><span class="n">LLDB</span><span class="err">插件的命令。</span> 
+<span class="n">process</span>  <span class="o">-</span> <span class="err">与当前平台上的进程交互的命令。</span>
+<span class="n">exit</span> <span class="o">-</span> <span class="err">退出</span><span class="n">LLDB</span><span class="err">调试器。</span> 
+<span class="k">register</span>  <span class="o">-</span> <span class="err">访问当前线程和堆栈帧的寄存器的命令。</span> 
+<span class="n">script</span>  <span class="o">-</span> <span class="err">使用提供的代码调用脚本解释器</span> <span class="err">显示任何结果。如果没有提供代码，请启动交互式解释器。</span> <span class="n">settings</span>  <span class="o">-</span> <span class="err">管理</span><span class="n">LLDB</span><span class="err">设置的命令。</span> 
+<span class="n">source</span>  <span class="o">-</span> <span class="err">用于检查当前目标进程的调试信息所描述的源代码的命令。</span> 
+<span class="n">target</span>  <span class="o">-</span> <span class="err">在调试器目标上运行的命令。</span> 
+<span class="kr">thread</span>  <span class="o">-</span> <span class="err">在当前进程中的一个或多个线程上运行的命令。</span> 
+<span class="n">type</span>  <span class="o">-</span> <span class="err">用于在类型系统上操作的命令。</span> 
+<span class="n">version</span>  <span class="o">-</span> <span class="err">显示</span><span class="n">LLDB</span><span class="err">调试器版本。</span> 
+<span class="n">watchpoint</span>  <span class="o">-</span> <span class="err">在观察点上操作的命令。当前命令缩写（有关详细信息，请键入&#39;</span><span class="n">help</span> <span class="n">command</span> <span class="n">alias</span><span class="err">&#39;）：</span>
+<span class="n">add</span><span class="o">-</span><span class="n">dsym</span>  <span class="o">-</span> <span class="err">通过指定调试符号文件的路径或使用选项指定模块，将调试符号文件添加到目标的当前模块之一下载符号。附加</span> <span class="o">-</span> <span class="err">附加到流程</span> <span class="err">按</span><span class="n">ID</span><span class="err">或名称。</span> 
+<span class="n">b</span>  <span class="o">-</span> <span class="err">使用几种简写格式之一设置断点。</span> 
+<span class="n">bt</span>  <span class="o">-</span> <span class="err">显示当前线程的调用堆栈。任何数字参数最多显示多个帧。参数&#39;</span><span class="n">all</span><span class="err">&#39;显示所有线程。</span> 
+<span class="n">c</span>  <span class="o">-</span> <span class="err">继续执行当前进程中的所有线程。</span> 
+<span class="n">call</span>  <span class="o">-</span> <span class="err">在当前线程上计算表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。继续</span> <span class="o">-</span> <span class="err">继续执行当前进程中的所有线程。</span> 
+<span class="n">detach</span>  <span class="o">-</span> <span class="err">从当前目标进程中分离出来。</span> 
+<span class="n">di</span>  <span class="o">-</span> <span class="err">反汇编当前目标中的指定指令。默认为当前线程和堆栈帧的当前函数。</span> 
+<span class="n">dis</span>  <span class="o">-</span> <span class="err">反汇编当前目标中的指定指令。默认为当前线程和堆栈帧的当前函数。显示</span> <span class="o">-</span> <span class="err">评估表达式</span> <span class="err">每一站（参见&#39;帮助目标停止挂钩&#39;。）向下</span> <span class="o">-</span> <span class="err">选择一个较新的堆栈帧。默认为移动一帧，数字参数可以指定任意数字。</span> 
+<span class="n">env</span>  <span class="o">-</span> <span class="err">查看和设置环境变量的简写。</span> 
+<span class="n">exit</span>  <span class="o">-</span> <span class="err">退出</span><span class="n">LLDB</span><span class="err">调试器。</span> 
+<span class="n">f</span>  <span class="o">-</span> <span class="err">从当前线程（参见&#39;</span><span class="kr">thread</span> <span class="n">backtrace</span><span class="err">&#39;。）文件中按索引选择当前堆栈帧</span> <span class="o">-</span> <span class="err">使用参数作为主可执行文件创建目标。完成</span> <span class="o">-</span> <span class="err">完成执行当前堆栈帧并在返回后停止。除非指定，否则默认为当前线程。</span> 
+<span class="n">image</span>  <span class="o">-</span> <span class="err">用于访问一个或多个目标模块的信息的命令。</span> 
+<span class="n">j</span>  <span class="o">-</span> <span class="err">将程序计数器设置为新地址。</span> 
+<span class="n">jump</span>  <span class="o">-</span> <span class="err">将程序计数器设置为新地址。</span> 
+<span class="n">kill</span>  <span class="o">-</span> <span class="err">终止当前的目标进程。</span> 
+<span class="n">l</span>  <span class="o">-</span> <span class="err">使用几种简写格式之一列出相关的源代码。</span>
+<span class="err">名单</span>  <span class="o">-</span> <span class="err">使用几种简写格式之一列出相关的源代码。</span> 
+<span class="n">n</span>  <span class="o">-</span> <span class="err">源级单步，逐步调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">next</span>  <span class="o">-</span> <span class="err">源级单步，逐步调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">nexti</span>  <span class="o">-</span> <span class="err">指令级单步，逐步调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">ni</span>  <span class="o">-</span> <span class="err">指令级单步，逐步调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">p</span>  <span class="o">-</span> <span class="err">在当前线程上计算表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。</span> 
+<span class="n">parray</span>  <span class="o">-</span> <span class="err">评估当前线程上的表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。</span> 
+<span class="n">po</span>  <span class="o">-</span> <span class="err">评估当前线程上的表达式。显示任何返回值，其格式由类型的作者控制。</span> 
+<span class="n">poarray</span>  <span class="o">-</span> <span class="err">评估当前线程上的表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。</span> 
+<span class="n">print</span>  <span class="o">-</span> <span class="err">评估当前线程上的表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。</span> 
+<span class="n">q</span>  <span class="o">-</span> <span class="err">退出</span><span class="n">LLDB</span><span class="err">调试器。</span> 
+<span class="n">r</span>  <span class="o">-</span> <span class="err">在调试器中启动可执行文件。</span> 
+<span class="n">rbreak</span>  <span class="o">-</span> <span class="err">在可执行文件中设置断点或断点集。</span> 
+<span class="n">repl</span>  <span class="o">-</span> <span class="err">评估当前线程上的表达式。使用</span><span class="n">LLDB</span><span class="err">的默认格式显示任何返回的值。</span> 
+<span class="n">run</span>  <span class="o">-</span> <span class="err">在调试器中启动可执行文件。</span> 
+<span class="n">s</span>  <span class="o">-</span> <span class="err">源级单步，踩入调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">si</span>  <span class="o">-</span> <span class="err">指令级单步，步入调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">sif</span>  <span class="o">-</span> <span class="err">单步执行当前块，如果直接进入名称的函数，则停止</span> <span class="err">匹配</span><span class="n">TargetFunctionName</span><span class="err">。</span>
+<span class="err">步骤</span> <span class="o">-</span> <span class="err">源级单步，踩入调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">stepi</span>  <span class="o">-</span> <span class="err">指令级单步，步入调用。除非指定，否则默认为当前线程。</span> 
+<span class="n">t</span>  <span class="o">-</span> <span class="err">更改当前选定的线程。</span> 
+<span class="n">tbreak</span>  <span class="o">-</span> <span class="err">使用几种简写格式之一设置一次性断点。</span> 
+<span class="n">undisplay</span>  <span class="o">-</span> <span class="err">停止在每个停靠点显示表达式（由</span><span class="n">stop</span><span class="o">-</span><span class="n">hook</span> <span class="n">index</span><span class="err">指定。）</span>
+<span class="n">up</span>  <span class="o">-</span> <span class="err">选择较旧的堆栈帧。默认为移动一帧，数字参数可以指定任意数字。</span> 
+<span class="n">x</span>  <span class="o">-</span> <span class="err">从当前目标进程的内存中读取。</span> 
+</pre></div>
+    </div>
+
+        </div>
+        <div id="footer">
+              <p>
+                Copyright © 2012-2018 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+                Theme by <a href="https://github.com/tankywoo/yasimple" target="_blank">YASimple</a>.
+              </p>
+                <p>Last Update 2018-09-03 13:35:41</p>
+        </div>
+    </body>
+</html>
